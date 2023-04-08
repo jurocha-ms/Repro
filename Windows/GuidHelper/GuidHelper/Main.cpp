@@ -6,7 +6,7 @@ using std::cout;
 using std::endl;
 using winrt::Windows::Foundation::GuidHelper;
 
-void main()
+int main()
 {
 	try
 	{
