@@ -5,6 +5,7 @@
  * @format
  */
 
+//TODO: await (await fetch('https://raw.githubusercontent.com/microsoft/react-native-windows/main/.yarnrc.yml')).text()
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
