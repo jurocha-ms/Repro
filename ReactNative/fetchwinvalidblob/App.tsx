@@ -14,7 +14,7 @@ const App = () => {
 	const [reqId, setReqId] = useState(0);
 	const uri =
 		'https://raw.githubusercontent.com/microsoft/react-native-windows/main/.yarnrc.yml';
-//		'http://localhost:5555';
+	//	'http://localhost:5555';
 
 	const doFetch = async () => {
 		var response = await fetch(uri);
@@ -23,30 +23,20 @@ const App = () => {
 		setContent(text);
 	};
 
-
 	useEffect(() => {
-		const doFetch = async () => {
-			var response = await fetch(uri);
-			var text = await response.text();
-			setContent(text);
-		};
-
 		doFetch().catch(console.error);
-	}, []);
+	});
 
 	return (
-		<View style={
-			{
+		<View
+			style={{
 				flex: 1,
 				justifyContent: 'flex-start',
 				alignItems: 'stretch',
 			}}>
 			<Text>Response {reqId}:</Text>
 			<Text>[{content}]</Text>
-			<Button
-				onPress={doFetch}
-				title='Reload'
-			/>
+			<Button onPress={doFetch} title="Reload" />
 		</View>
 	);
 };
