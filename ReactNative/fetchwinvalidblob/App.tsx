@@ -13,6 +13,7 @@ const App = () => {
 	const [content, setContent] = useState('NOTHING');
 	const uri =
 		'https://raw.githubusercontent.com/microsoft/react-native-windows/main/.yarnrc.yml';
+//		'http://localhost:5555';
 
 	useEffect(() => {
 		const doFetch = async () => {
@@ -25,7 +26,12 @@ const App = () => {
 	}, []);
 
 	return (
-		<View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+		<View style={
+			{
+				flex: 1,
+				justifyContent: 'flex-start',
+				alignItems: 'stretch',
+			}}>
 			<Text>Content:</Text>
 			<Text>[{content}]</Text>
 		</View>
