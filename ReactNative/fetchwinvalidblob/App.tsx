@@ -25,7 +25,7 @@ const App = () => {
 
 	useEffect(() => {
 		doFetch().catch(console.error);
-	});
+	}, []);
 
 	return (
 		<View
