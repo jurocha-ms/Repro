@@ -7,13 +7,22 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import {Button, Text, View} from 'react-native';
 
 const App = () => {
 	const [content, setContent] = useState('NOTHING');
+	const [reqId, setReqId] = useState(0);
 	const uri =
 		'https://raw.githubusercontent.com/microsoft/react-native-windows/main/.yarnrc.yml';
 //		'http://localhost:5555';
+
+	const doFetch = async () => {
+		var response = await fetch(uri);
+		var text = await response.text();
+		setReqId(reqId + 1);
+		setContent(text);
+	};
+
 
 	useEffect(() => {
 		const doFetch = async () => {
@@ -32,8 +41,12 @@ const App = () => {
 				justifyContent: 'flex-start',
 				alignItems: 'stretch',
 			}}>
-			<Text>Content:</Text>
+			<Text>Response {reqId}:</Text>
 			<Text>[{content}]</Text>
+			<Button
+				onPress={doFetch}
+				title='Reload'
+			/>
 		</View>
 	);
 };
