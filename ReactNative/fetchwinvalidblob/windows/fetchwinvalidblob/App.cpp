@@ -20,15 +20,18 @@ namespace winrt::fetchwinvalidblob::implementation
 /// </summary>
 App::App() noexcept
 {
+    /// false => works as expected
+    /// true  => causes XMLHttpRequest: Invalid response for blob...
+    bool directDebug = false;
 #if BUNDLE
     JavaScriptBundleFile(L"index.windows");
-    InstanceSettings().UseWebDebugger(false);
-    InstanceSettings().UseDirectDebugger(true);
+    InstanceSettings().UseWebDebugger(!directDebug);
+    InstanceSettings().UseDirectDebugger(directDebug);
     InstanceSettings().UseFastRefresh(false);
 #else
     JavaScriptBundleFile(L"index");
-    InstanceSettings().UseWebDebugger(false);
-    InstanceSettings().UseDirectDebugger(true);
+    InstanceSettings().UseWebDebugger(!directDebug);
+    InstanceSettings().UseDirectDebugger(directDebug);
     InstanceSettings().UseFastRefresh(true);
 #endif
 
