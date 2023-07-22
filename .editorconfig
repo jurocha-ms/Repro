@@ -13,6 +13,10 @@ end_of_line = lf
 [*.{js, yml}]
 indent_size = 2
 
+[*.md]
+indent_style = space
+indent_size = 2
+
 [*.{cs,c,cpp,h,hpp}]
 indent_size = 4
 
