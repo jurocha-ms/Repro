@@ -22,7 +22,7 @@ App::App() noexcept
 {
     /// false => works as expected
     /// true  => causes XMLHttpRequest: Invalid response for blob...
-    bool directDebug = false;
+    bool directDebug = true;
 #if BUNDLE
     JavaScriptBundleFile(L"index.windows");
     InstanceSettings().UseWebDebugger(!directDebug);
