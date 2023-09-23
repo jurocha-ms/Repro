@@ -20,6 +20,11 @@ indent_size = 2
 [*.{cs,c,cpp,h,hpp}]
 indent_size = 4
 
+# Node files
+[package.json]
+indent_style = space
+indent_size = 2
+
 # Xml project files
 [*.{config,csproj,njsproj,props,targets,vcxitems,vcxproj,vcxproj.filters}]
 indent_size = 2
