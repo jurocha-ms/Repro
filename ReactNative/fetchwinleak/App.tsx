@@ -7,12 +7,13 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Button, Text, TextInput, View} from 'react-native';
 
 const App = () => {
 	const [content, setContent] = useState('NOTHING');
 	const [reqId, setReqId] = useState(0);
-	const size = 1024 * 1024;//TODO: Set in GUI
+	const [size, setSize] = useState(`${1024 * 1024}`);
+	//const size = 1024 * 1024;//TODO: Set in GUI
 	const uri =
 		`http://localhost:5000/${size}`;
 
@@ -23,9 +24,9 @@ const App = () => {
 		setContent(`${text.length}`);
 	};
 
-	// useEffect(() => {
-	// 	doFetch().catch(console.error);
-	// }, []);
+	useEffect(() => {
+		//doFetch().catch(console.error);
+	}, []);
 
 	return (
 		<View
@@ -35,8 +36,9 @@ const App = () => {
 				alignItems: 'stretch',
 			}}>
 			<Text>Response {reqId}:</Text>
-			<Text>[{content}]</Text>
 			<Button onPress={doFetch} title="Reload" />
+			<TextInput onChangeText={setSize}>{size}</TextInput>
+			<Text>[{content}]</Text>
 		</View>
 	);
 };
