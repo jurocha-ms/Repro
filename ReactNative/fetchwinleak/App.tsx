@@ -6,14 +6,13 @@
  * @format
  */
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 
 const App = () => {
 	const [content, setContent] = useState('NOTHING');
 	const [reqId, setReqId] = useState(0);
 	const [size, setSize] = useState(`${1024 * 1024}`);
-	//const size = 1024 * 1024;//TODO: Set in GUI
 	const uri =
 		`http://localhost:5000/${size}`;
 
@@ -23,10 +22,6 @@ const App = () => {
 		setReqId(reqId + 1);
 		setContent(`${text.length}`);
 	};
-
-	useEffect(() => {
-		//doFetch().catch(console.error);
-	}, []);
 
 	return (
 		<View
@@ -38,7 +33,7 @@ const App = () => {
 			<TextInput
 				style={styles.input}
 				onChangeText={setSize}>
-					{size}
+				{size}
 			</TextInput>
 			<Text></Text>
 			<Text style={styles.text}>Response {reqId}:</Text>
