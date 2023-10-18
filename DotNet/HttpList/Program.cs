@@ -1,23 +1,27 @@
-﻿using System.Net;
+﻿///
+// See https://learn.microsoft.com/en-us/dotnet/api/system.net.httplistener
+///
+
+using System.Net;
 
 if (!HttpListener.IsSupported)
 {
-    Console.WriteLine("Windows XP SP2 or Server 2003 is required to use the HttpListener class.");
-    return;
+	Console.WriteLine("Windows XP SP2 or Server 2003 is required to use the HttpListener class.");
+	return;
 }
 
 var prefixes = new string[] { "http://localhost:5000/" };
 // URI prefixes are required,
 // for example "http://contoso.com:8080/index/".
 if (prefixes == null || prefixes.Length == 0)
-    throw new ArgumentException("prefixes");
+	throw new ArgumentException("prefixes");
 
 // Create a listener.
 var listener = new HttpListener();
 // Add the prefixes.
 foreach (string s in prefixes)
 {
-    listener.Prefixes.Add(s);
+	listener.Prefixes.Add(s);
 }
 listener.Start();
 Console.WriteLine("Listening...");
