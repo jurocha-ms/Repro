@@ -7,7 +7,7 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {Button, Text, TextInput, View} from 'react-native';
+import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 
 const App = () => {
 	const [content, setContent] = useState('NOTHING');
@@ -32,15 +32,30 @@ const App = () => {
 		<View
 			style={{
 				flex: 1,
-				justifyContent: 'flex-start',
-				alignItems: 'stretch',
+				justifyContent: 'center',
 			}}>
-			<Text>Response {reqId}:</Text>
 			<Button onPress={doFetch} title="Reload" />
-			<TextInput onChangeText={setSize}>{size}</TextInput>
-			<Text>[{content}]</Text>
+			<TextInput
+				style={styles.input}
+				onChangeText={setSize}>
+					{size}
+			</TextInput>
+			<Text></Text>
+			<Text style={styles.text}>Response {reqId}:</Text>
+			<Text style={styles.text}>[{content}]</Text>
 		</View>
 	);
 };
+
+const styles = StyleSheet.create({
+	text: {
+		textAlign: 'center',
+	},
+	input: {
+		textAlign: 'center',
+		backgroundColor: '#003269',
+		fontWeight: 'bold'
+	}
+});
 
 export default App;
