@@ -27,11 +27,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "..\node_modules\r
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReactNative", "ReactNative", "{5EA20F54-880A-49F3-99FA-4B3FE54E8AB1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Microsoft.ReactNative.Shared", "..\node_modules\react-native-windows\Shared\Shared.vcxitems", "{2049DBE9-8D13-42C9-AE4B-413AE38FFFD0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shared", "..\node_modules\react-native-windows\Shared\Shared.vcxitems", "{2049DBE9-8D13-42C9-AE4B-413AE38FFFD0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mso", "..\node_modules\react-native-windows\Mso\Mso.vcxitems", "{84E05BFA-CBAF-4F0D-BFB6-4CE85742A57E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Include", "..\node_modules\react-native-windows\include\Include.vcxitems", "{EF074BA1-2D54-4D49-A28E-5E040B47CD2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "httplist", "HttpList\httplist.csproj", "{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -134,6 +136,18 @@ Global
 		{14B93DC8-FD93-4A6D-81CB-8BC96644501C}.Release|x86.ActiveCfg = Release|Win32
 		{14B93DC8-FD93-4A6D-81CB-8BC96644501C}.Release|x86.Build.0 = Release|Win32
 		{14B93DC8-FD93-4A6D-81CB-8BC96644501C}.Release|x86.Deploy.0 = Release|Win32
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Debug|x64.Build.0 = Debug|Any CPU
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Debug|x86.Build.0 = Debug|Any CPU
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Release|x64.ActiveCfg = Release|Any CPU
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Release|x64.Build.0 = Release|Any CPU
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Release|x86.Build.0 = Release|Any CPU
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{EEB8467F-A60F-4236-A4CC-5AD0888F99C3}.Release|ARM64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
