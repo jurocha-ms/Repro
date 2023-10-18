@@ -32,9 +32,8 @@ const App = () => {
 			<Button onPress={doFetch} title="Reload" />
 			<TextInput
 				style={styles.input}
-				onChangeText={setSize}>
-				{size}
-			</TextInput>
+				onChangeText={setSize}
+				value={size} />
 			<Text></Text>
 			<Text style={styles.text}>Response {reqId}:</Text>
 			<Text style={styles.text}>[{content}]</Text>
@@ -48,8 +47,9 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		textAlign: 'center',
+		color: 'white',
 		backgroundColor: '#003269',
-		fontWeight: 'bold'
+		fontWeight: 'bold',
 	}
 });
 
