@@ -9,7 +9,6 @@ using System.Net;
 var prefixes = new string[] { "http://localhost:5000/" };
 
 // Create a listener.
-//var listener = new HttpListener();
 using (var listener = new HttpListener())
 {
 	// Add the prefixes.
