@@ -12,20 +12,20 @@ import {Button, Text, View} from 'react-native';
 const App = () => {
 	const [content, setContent] = useState('NOTHING');
 	const [reqId, setReqId] = useState(0);
+	const size = 1024 * 1024;//TODO: Set in GUI
 	const uri =
-		'https://raw.githubusercontent.com/microsoft/react-native-windows/main/.yarnrc.yml';
-	//	'http://localhost:5555';
+		`http://localhost:5000/${size}`;
 
 	const doFetch = async () => {
 		var response = await fetch(uri);
 		var text = await response.text();
 		setReqId(reqId + 1);
-		setContent(text);
+		setContent(`${text.length}`);
 	};
 
-	useEffect(() => {
-		doFetch().catch(console.error);
-	}, []);
+	// useEffect(() => {
+	// 	doFetch().catch(console.error);
+	// }, []);
 
 	return (
 		<View
