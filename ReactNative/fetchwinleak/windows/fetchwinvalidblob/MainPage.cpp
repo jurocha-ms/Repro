@@ -9,7 +9,7 @@
 using namespace winrt;
 using namespace xaml;
 
-namespace winrt::fetchwinvalidblob::implementation
+namespace winrt::fetchwinleak::implementation
 {
     MainPage::MainPage()
     {

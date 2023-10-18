@@ -2,7 +2,7 @@
 #include "MainPage.g.h"
 #include <winrt/Microsoft.ReactNative.h>
 
-namespace winrt::fetchwinvalidblob::implementation
+namespace winrt::fetchwinleak::implementation
 {
     struct MainPage : MainPageT<MainPage>
     {
@@ -10,7 +10,7 @@ namespace winrt::fetchwinvalidblob::implementation
     };
 }
 
-namespace winrt::fetchwinvalidblob::factory_implementation
+namespace winrt::fetchwinleak::factory_implementation
 {
     struct MainPage : MainPageT<MainPage, implementation::MainPage>
     {

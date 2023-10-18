@@ -6,7 +6,7 @@
 
 namespace activation = winrt::Windows::ApplicationModel::Activation;
 
-namespace winrt::fetchwinvalidblob::implementation
+namespace winrt::fetchwinleak::implementation
 {
     struct App : AppT<App>
     {
@@ -18,4 +18,4 @@ namespace winrt::fetchwinvalidblob::implementation
       private:
         using super = AppT<App>;
     };
-} // namespace winrt::fetchwinvalidblob::implementation
+} // namespace winrt::fetchwinleak::implementation

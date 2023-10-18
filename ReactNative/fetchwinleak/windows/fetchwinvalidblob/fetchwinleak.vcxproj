@@ -7,8 +7,8 @@
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{1b312807-4f08-4a24-97ab-bdfd6c6cabeb}</ProjectGuid>
-    <ProjectName>fetchwinvalidblob</ProjectName>
-    <RootNamespace>fetchwinvalidblob</RootNamespace>
+    <ProjectName>fetchwinleak</ProjectName>
+    <RootNamespace>fetchwinleak</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>17.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>

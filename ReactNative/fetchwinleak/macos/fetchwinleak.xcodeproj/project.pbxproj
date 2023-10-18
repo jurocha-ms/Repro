@@ -11,22 +11,22 @@
 		514201522437B4B40078DB4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 514201512437B4B40078DB4F /* Assets.xcassets */; };
 		514201552437B4B40078DB4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514201532437B4B40078DB4F /* Main.storyboard */; };
 		514201582437B4B40078DB4F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 514201572437B4B40078DB4F /* main.m */; };
-		8A8E41B0B13BA3D9FAFCAE12 /* libPods-fetchwinvalidblob-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B56BA40E5FBCAE5034E242C4 /* libPods-fetchwinvalidblob-macOS.a */; };
+		8A8E41B0B13BA3D9FAFCAE12 /* libPods-fetchwinleak-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B56BA40E5FBCAE5034E242C4 /* libPods-fetchwinleak-macOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		13B07F961A680F5B00A75B9A /* fetchwinvalidblob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fetchwinvalidblob.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		514201492437B4B30078DB4F /* fetchwinvalidblob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fetchwinvalidblob.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* fetchwinleak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fetchwinleak.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		514201492437B4B30078DB4F /* fetchwinleak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fetchwinleak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5142014B2437B4B30078DB4F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5142014C2437B4B30078DB4F /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		514201512437B4B40078DB4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		514201542437B4B40078DB4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		514201562437B4B40078DB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		514201572437B4B40078DB4F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		514201592437B4B40078DB4F /* fetchwinvalidblob.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fetchwinvalidblob.entitlements; sourceTree = "<group>"; };
-		8EF2E44A21508856DF791055 /* Pods-fetchwinvalidblob-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fetchwinvalidblob-macOS.release.xcconfig"; path = "Target Support Files/Pods-fetchwinvalidblob-macOS/Pods-fetchwinvalidblob-macOS.release.xcconfig"; sourceTree = "<group>"; };
-		B56BA40E5FBCAE5034E242C4 /* libPods-fetchwinvalidblob-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fetchwinvalidblob-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB05F5007F55AC17D3AEAF13 /* Pods-fetchwinvalidblob-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fetchwinvalidblob-macOS.debug.xcconfig"; path = "Target Support Files/Pods-fetchwinvalidblob-macOS/Pods-fetchwinvalidblob-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		514201592437B4B40078DB4F /* fetchwinleak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fetchwinleak.entitlements; sourceTree = "<group>"; };
+		8EF2E44A21508856DF791055 /* Pods-fetchwinleak-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fetchwinleak-macOS.release.xcconfig"; path = "Target Support Files/Pods-fetchwinleak-macOS/Pods-fetchwinleak-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		B56BA40E5FBCAE5034E242C4 /* libPods-fetchwinleak-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fetchwinleak-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB05F5007F55AC17D3AEAF13 /* Pods-fetchwinleak-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fetchwinleak-macOS.debug.xcconfig"; path = "Target Support Files/Pods-fetchwinleak-macOS/Pods-fetchwinleak-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -42,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A8E41B0B13BA3D9FAFCAE12 /* libPods-fetchwinvalidblob-macOS.a in Frameworks */,
+				8A8E41B0B13BA3D9FAFCAE12 /* libPods-fetchwinleak-macOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,12 +53,12 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				B56BA40E5FBCAE5034E242C4 /* libPods-fetchwinvalidblob-macOS.a */,
+				B56BA40E5FBCAE5034E242C4 /* libPods-fetchwinleak-macOS.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5142014A2437B4B30078DB4F /* fetchwinvalidblob-macOS */ = {
+		5142014A2437B4B30078DB4F /* fetchwinleak-macOS */ = {
 			isa = PBXGroup;
 			children = (
 				5142014B2437B4B30078DB4F /* AppDelegate.h */,
@@ -67,9 +67,9 @@
 				514201532437B4B40078DB4F /* Main.storyboard */,
 				514201562437B4B40078DB4F /* Info.plist */,
 				514201572437B4B40078DB4F /* main.m */,
-				514201592437B4B40078DB4F /* fetchwinvalidblob.entitlements */,
+				514201592437B4B40078DB4F /* fetchwinleak.entitlements */,
 			);
-			path = "fetchwinvalidblob-macOS";
+			path = "fetchwinleak-macOS";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -82,7 +82,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				5142014A2437B4B30078DB4F /* fetchwinvalidblob-macOS */,
+				5142014A2437B4B30078DB4F /* fetchwinleak-macOS */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
@@ -96,8 +96,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* fetchwinvalidblob.app */,
-				514201492437B4B30078DB4F /* fetchwinvalidblob.app */,
+				13B07F961A680F5B00A75B9A /* fetchwinleak.app */,
+				514201492437B4B30078DB4F /* fetchwinleak.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -105,8 +105,8 @@
 		F5C439FD5153D0BFDE8DB835 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DB05F5007F55AC17D3AEAF13 /* Pods-fetchwinvalidblob-macOS.debug.xcconfig */,
-				8EF2E44A21508856DF791055 /* Pods-fetchwinvalidblob-macOS.release.xcconfig */,
+				DB05F5007F55AC17D3AEAF13 /* Pods-fetchwinleak-macOS.debug.xcconfig */,
+				8EF2E44A21508856DF791055 /* Pods-fetchwinleak-macOS.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
@@ -115,9 +115,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13B07F861A680F5B00A75B9A /* fetchwinvalidblob-iOS */ = {
+		13B07F861A680F5B00A75B9A /* fetchwinleak-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "fetchwinvalidblob-iOS" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "fetchwinleak-iOS" */;
 			buildPhases = (
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -129,14 +129,14 @@
 			);
 			dependencies = (
 			);
-			name = "fetchwinvalidblob-iOS";
-			productName = fetchwinvalidblob;
-			productReference = 13B07F961A680F5B00A75B9A /* fetchwinvalidblob.app */;
+			name = "fetchwinleak-iOS";
+			productName = fetchwinleak;
+			productReference = 13B07F961A680F5B00A75B9A /* fetchwinleak.app */;
 			productType = "com.apple.product-type.application";
 		};
-		514201482437B4B30078DB4F /* fetchwinvalidblob-macOS */ = {
+		514201482437B4B30078DB4F /* fetchwinleak-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5142015A2437B4B40078DB4F /* Build configuration list for PBXNativeTarget "fetchwinvalidblob-macOS" */;
+			buildConfigurationList = 5142015A2437B4B40078DB4F /* Build configuration list for PBXNativeTarget "fetchwinleak-macOS" */;
 			buildPhases = (
 				1A938104A937498D81B3BD3B /* [CP] Check Pods Manifest.lock */,
 				381D8A6F24576A6C00465D17 /* Start Packager */,
@@ -150,9 +150,9 @@
 			);
 			dependencies = (
 			);
-			name = "fetchwinvalidblob-macOS";
-			productName = fetchwinvalidblob;
-			productReference = 514201492437B4B30078DB4F /* fetchwinvalidblob.app */;
+			name = "fetchwinleak-macOS";
+			productName = fetchwinleak;
+			productReference = 514201492437B4B30078DB4F /* fetchwinleak.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -172,7 +172,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "fetchwinvalidblob" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "fetchwinleak" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -185,8 +185,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* fetchwinvalidblob-iOS */,
-				514201482437B4B30078DB4F /* fetchwinvalidblob-macOS */,
+				13B07F861A680F5B00A75B9A /* fetchwinleak-iOS */,
+				514201482437B4B30078DB4F /* fetchwinleak-macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -240,7 +240,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-fetchwinvalidblob-macOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-fetchwinleak-macOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -289,7 +289,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-fetchwinvalidblob-macOS/Pods-fetchwinvalidblob-macOS-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-fetchwinleak-macOS/Pods-fetchwinleak-macOS-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -298,7 +298,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-fetchwinvalidblob-macOS/Pods-fetchwinvalidblob-macOS-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-fetchwinleak-macOS/Pods-fetchwinleak-macOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -360,7 +360,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "fetchwinvalidblob-iOS/Info.plist";
+				INFOPLIST_FILE = "fetchwinleak-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -368,7 +368,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = fetchwinvalidblob;
+				PRODUCT_NAME = fetchwinleak;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -381,7 +381,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = "fetchwinvalidblob-iOS/Info.plist";
+				INFOPLIST_FILE = "fetchwinleak-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -389,7 +389,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = fetchwinvalidblob;
+				PRODUCT_NAME = fetchwinleak;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -397,12 +397,12 @@
 		};
 		5142015B2437B4B40078DB4F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DB05F5007F55AC17D3AEAF13 /* Pods-fetchwinvalidblob-macOS.debug.xcconfig */;
+			baseConfigurationReference = DB05F5007F55AC17D3AEAF13 /* Pods-fetchwinleak-macOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				INFOPLIST_FILE = "fetchwinvalidblob-macos/Info.plist";
+				INFOPLIST_FILE = "fetchwinleak-macos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_LDFLAGS = (
@@ -411,18 +411,18 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = fetchwinvalidblob;
+				PRODUCT_NAME = fetchwinleak;
 				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		5142015C2437B4B40078DB4F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8EF2E44A21508856DF791055 /* Pods-fetchwinvalidblob-macOS.release.xcconfig */;
+			baseConfigurationReference = 8EF2E44A21508856DF791055 /* Pods-fetchwinleak-macOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = "fetchwinvalidblob-macos/Info.plist";
+				INFOPLIST_FILE = "fetchwinleak-macos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_LDFLAGS = (
@@ -431,7 +431,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = fetchwinvalidblob;
+				PRODUCT_NAME = fetchwinleak;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -556,7 +556,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "fetchwinvalidblob-iOS" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "fetchwinleak-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -565,7 +565,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5142015A2437B4B40078DB4F /* Build configuration list for PBXNativeTarget "fetchwinvalidblob-macOS" */ = {
+		5142015A2437B4B40078DB4F /* Build configuration list for PBXNativeTarget "fetchwinleak-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5142015B2437B4B40078DB4F /* Debug */,
@@ -574,7 +574,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "fetchwinvalidblob" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "fetchwinleak" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

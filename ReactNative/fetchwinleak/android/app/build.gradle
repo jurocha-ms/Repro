@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.fetchwinvalidblob"
+    namespace "com.fetchwinleak"
     defaultConfig {
-        applicationId "com.fetchwinvalidblob"
+        applicationId "com.fetchwinleak"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

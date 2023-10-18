@@ -1,6 +1,6 @@
 #include "NamespaceRedirect.h"
 
-namespace fetchwinvalidblob
+namespace fetchwinleak
 {
     [default_interface]
     runtimeclass MainPage : XAML_NAMESPACE.Controls.Page

@@ -1,4 +1,4 @@
-package com.fetchwinvalidblob;
+package com.fetchwinleak;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
