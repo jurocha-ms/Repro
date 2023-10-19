@@ -10,7 +10,7 @@ import React, {useState} from 'react';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 
 const App = () => {
-	const [content, setContent] = useState('NOTHING');
+	const [total, setTotal] = useState(0);
 	const [reqId, setReqId] = useState(0);
 	const [size, setSize] = useState(`${1024 * 1024}`);
 	const uri =
@@ -20,7 +20,7 @@ const App = () => {
 		var response = await fetch(uri);
 		var text = await response.text();
 		setReqId(reqId + 1);
-		setContent(`${text.length}`);
+		setTotal(total + text.length);
 	};
 
 	return (
@@ -35,8 +35,8 @@ const App = () => {
 				onChangeText={setSize}
 				value={size} />
 			<Text></Text>
-			<Text style={styles.text}>Response {reqId}:</Text>
-			<Text style={styles.text}>[{content}]</Text>
+			<Text style={styles.text}>Responses: {reqId}</Text>
+			<Text style={styles.text}>[{total}]</Text>
 		</View>
 	);
 };
