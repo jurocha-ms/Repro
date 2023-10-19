@@ -13,8 +13,7 @@ const App = () => {
 	const [total, setTotal] = useState(0);
 	const [reqId, setReqId] = useState(0);
 	const [size, setSize] = useState(`${8 * 1024 * 1024}`);
-	const uri =
-		`http://localhost:5000/${size}`;
+	const uri = `http://localhost:5000/${size}`;
 
 	const doFetch = async () => {
 		var response = await fetch(uri);
@@ -30,10 +29,7 @@ const App = () => {
 				justifyContent: 'center',
 			}}>
 			<Button onPress={doFetch} title="Reload" />
-			<TextInput
-				style={styles.input}
-				onChangeText={setSize}
-				value={size} />
+			<TextInput style={styles.input} onChangeText={setSize} value={size} />
 			<Text></Text>
 			<Text style={styles.text}>Responses: {reqId}</Text>
 			<Text style={styles.text}>[{total}]</Text>
@@ -50,7 +46,7 @@ const styles = StyleSheet.create({
 		color: 'white',
 		backgroundColor: '#003269',
 		fontWeight: 'bold',
-	}
+	},
 });
 
 export default App;
