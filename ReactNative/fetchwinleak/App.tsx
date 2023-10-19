@@ -12,7 +12,7 @@ import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 const App = () => {
 	const [total, setTotal] = useState(0);
 	const [reqId, setReqId] = useState(0);
-	const [size, setSize] = useState(`${1024 * 1024}`);
+	const [size, setSize] = useState(`${8 * 1024 * 1024}`);
 	const uri =
 		`http://localhost:5000/${size}`;
 
