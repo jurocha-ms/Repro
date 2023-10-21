@@ -7517,10 +7517,10 @@ react-native-macos@^0.71.0-0:
     whatwg-fetch "^3.0.0"
     ws "^6.2.2"
 
-react-native-windows@0.72.15:
-  version "0.72.15"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.72.15.tgz#7a1f35a4345cd86989cc88f7e32fadf51eedb6b2"
-  integrity sha512-O6ruh9480cKkB99cHZ9zCOlGBdAmw00AnQ6PpvKV22lV0mvNgiWO3izVfx4PJ8UfyfCQ+wWHwBP/QIerJXXZxA==
+react-native-windows@0.72.16:
+  version "0.72.16"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.72.16.tgz#ef3b86ff1c30d6921efd292081a1d1981cbf81c1"
+  integrity sha512-FHzZzzx3DlXdE0XhJ1VydIGJRUA/qTkfPuTnXE1mYMDOgfbZV0dApMwOuzpr55RhuUrWATLpWls/D4yX7CYxrw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^29.2.1"
