@@ -16,10 +16,32 @@ const App = () => {
 	const uri = `http://localhost:5000/${size}`;
 
 	const doFetch = async () => {
-		var response = await fetch(uri);
-		var text = await response.text();
-		setReqId(reqId + 1);
-		setTotal(total + text.length);
+		//var response = await fetch(uri);
+		//var text = await response.text();
+		//setReqId(reqId + 1);
+		//setTotal(total + text.length);
+		//setReqId(reqId + 1);
+
+		//WORKS
+		global.__blobCollectorProvider('F06550FF-B557-402A-93D8-45019B8BA19E');
+
+		//FAILS
+		//await fetch(uri);
+		//FAILS?
+		//await (await fetch(uri)).text();
+
+		//FAILS without explicit GC
+		//await new Blob(['0123456789ABCDEF']);
+		//WORKS
+		//await (await new Blob(['0123456789ABCDEF'])).text();
+
+		// var cont = '0123456789ABCDEF';
+		// while (cont.length < 8 * 1024 * 1024) {
+		// 	cont += cont;
+		// }
+		// await (await new Blob([cont])).text();
+
+		//global.gc();
 	};
 
 	return (
