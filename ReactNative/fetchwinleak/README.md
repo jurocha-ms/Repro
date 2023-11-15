@@ -30,4 +30,20 @@ This sample app provides the following:
 1. Continuously click on `Reload`.\
   Use a process monitoring tool to observe the significant increase in memory usage by the application which never goes down.
 
-Note, the macOS variant of this app does not show memory usage issues.
+Note, the macOS variant of this app does not show memory usage issues **because it uses JSC by default instead of Hermes**.\
+Switching to hermes in the macOS Podfile (`:hermes_enabled => true`)
+will cause the same behavior.
+
+## Root Cause
+See [Hermes #1147](https://github.com/facebook/hermes/issues/1147).
+
+Hermes had a bug in its garbage collection triggering.\
+The fix was released very recently ([2 weeks ago](https://github.com/facebook/hermes/commit/e7b2abefabb6a9671e1d30d7af08cd1f32c9a670) at the time of writing).
+
+## References
+- Root cause reported at the Hermes repository\
+  https://github.com/facebook/hermes/issues/1147
+- Another sample app to showcase the root cause\
+  https://github.com/clemensmol/rn-fetch-memoryleak
+- Blob-specific fix for React Native (non-root cause)\
+  https://github.com/facebook/react-native/pull/24745
