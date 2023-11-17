@@ -7,41 +7,17 @@
  */
 
 import React, {useState} from 'react';
-import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
 const App = () => {
-	const [total, setTotal] = useState(0);
-	const [reqId, setReqId] = useState(0);
-	const [size, setSize] = useState(`${8 * 1024 * 1024}`);
-	const uri = `http://localhost:5000/${size}`;
+	const [content, setContent] = useState('NOTHING');
+	const uri =
+		'https://raw.githubusercontent.com/microsoft/react-native-windows/main/.yarnrc.yml';
 
 	const doFetch = async () => {
 		var response = await fetch(uri);
 		var text = await response.text();
-		setReqId(reqId + 1);
-		setTotal(total + text.length);
-		setReqId(reqId + 1);
-
-		//WORKS
-		//global.__blobCollectorProvider('F06550FF-B557-402A-93D8-45019B8BA19E');
-
-		//FAILS
-		//await fetch(uri);
-		//FAILS?
-		//await (await fetch(uri)).text();
-
-		//FAILS without explicit GC
-		//await new Blob(['0123456789ABCDEF']);
-		//WORKS
-		//await (await new Blob(['0123456789ABCDEF'])).text();
-
-		// var cont = '0123456789ABCDEF';
-		// while (cont.length < 8 * 1024 * 1024) {
-		// 	cont += cont;
-		// }
-		// await (await new Blob([cont])).text();
-
-		//global.gc();
+		setContent(text);
 	};
 
 	return (
@@ -50,11 +26,19 @@ const App = () => {
 				flex: 1,
 				justifyContent: 'center',
 			}}>
+			<Text style={styles.text}>Instructions</Text>
+			<Text style={styles.text}>
+				1. Click on [Reload]. Text should go from [NOTHING] TO [enableScripts: false].
+			</Text>
+			<Text style={styles.text}>
+				2. Open the dev menu, select 'Reload Javascript'.
+			</Text>
+			<Text style={styles.text}>
+				3. Click on [Reload]. Text will not update. Exception will happen.
+			</Text>
+			<Text style={styles.text}></Text>
+			<Text style={styles.text}>[{content}]</Text>
 			<Button onPress={doFetch} title="Reload" />
-			<TextInput style={styles.input} onChangeText={setSize} value={size} />
-			<Text></Text>
-			<Text style={styles.text}>Responses: {reqId}</Text>
-			<Text style={styles.text}>[{total}]</Text>
 		</View>
 	);
 };
