@@ -6843,10 +6843,10 @@ react-native-macos@0.72.7:
     ws "^6.2.2"
     yargs "^17.6.2"
 
-react-native-windows@0.72.16:
-  version "0.72.16"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.72.16.tgz#ef3b86ff1c30d6921efd292081a1d1981cbf81c1"
-  integrity sha512-FHzZzzx3DlXdE0XhJ1VydIGJRUA/qTkfPuTnXE1mYMDOgfbZV0dApMwOuzpr55RhuUrWATLpWls/D4yX7CYxrw==
+react-native-windows@0.72.19:
+  version "0.72.19"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.72.19.tgz#6bef008e302cfb01a80b97c0724513cb20c06103"
+  integrity sha512-6TB0PQMUv05BBNh66t3GRptwPZsXRj/aMp7V8IHOlord4n88uhKZ3aE2JliP1eei4uahkj/tvbkQeNJeh3APBQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^29.2.1"
