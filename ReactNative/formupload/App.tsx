@@ -14,8 +14,7 @@ const App = () => {
 	const [content, setContent] = useState('NOTHING');
 	const [reqId, setReqId] = useState(0);
 	const uri =
-		'https://raw.githubusercontent.com/microsoft/react-native-windows/main/.yarnrc.yml';
-	//	'http://localhost:5555';
+		'http://localhost:5000/rn/formup';
 
 	// const doFetch = async () => {
 	// 	var response = await fetch(uri);
@@ -23,6 +22,16 @@ const App = () => {
 	// 	setReqId(reqId + 1);
 	// 	setContent(text);
 	// };
+
+	const doForm = async () => {
+		const formData = new FormData();
+		formData.append('username', 'test');
+
+		//var response = await fetch('https://www.google.com', {body:formData, method:'POST'});
+		var response = await fetch(uri, {body:formData, method:'POST'});
+		var text = await response.text();
+		setContent(text);
+	};
 
 	const uploadFile = async () => {
 		const pickerResult = await DocumentPicker.pickSingle({
@@ -74,10 +83,10 @@ const App = () => {
 				alignItems: 'stretch',
 			}}>
 			{/* <Text>Response {reqId}:</Text>
-			<Text>[{content}]</Text>
 			<Button onPress={doFetch} title="Reload" /> */}
-			<Text>Chale</Text>
+			<Text>[{content}]</Text>
 			<Button onPress={uploadFile} title="Open" />
+			<Button onPress={doForm} title="Send" />
 		</View>
 	);
 };
