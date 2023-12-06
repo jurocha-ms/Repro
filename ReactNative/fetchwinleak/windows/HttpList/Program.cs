@@ -3,6 +3,7 @@
 ///
 
 using System.Net;
+using System.Text;
 
 // URI prefixes are required,
 var prefixes = new string[] { "http://localhost:5000/" };
@@ -53,8 +54,19 @@ void RespondArbitraryBytes(HttpListenerContext context, string path)
 
 void RespondToFormUpload(HttpListenerContext context)
 {
-	context.Response.StatusCode = (int)HttpStatusCode.OK;
+	var reqBody = "";
+	using (var input = context.Request.InputStream)
+	{
+		var buffer = new byte[1024 * 1024];
+		int read = 0;
+		while (input.CanRead && (read = input.Read(buffer, 0, buffer.Length)) > 0)
+		{
+			reqBody += Encoding.UTF8.GetString(buffer, 0, read);
+		}
+	}
+	Console.WriteLine(reqBody);
 
+	context.Response.StatusCode = (int)HttpStatusCode.OK;
 	using (var output = context.Response.OutputStream)
 	{
 		output.Write(null);
