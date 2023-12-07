@@ -20,7 +20,10 @@ This sample app provides the following:
 
 ## Instructions
 
-```pwsh
-yarn
-yarn windows
-```
+1.  Start the app and sample server
+    ```pwsh
+    yarn
+    yarn windows
+    php -S localhost:5000 formupload.php
+    ```
+2.  Click on the `Send` button.
