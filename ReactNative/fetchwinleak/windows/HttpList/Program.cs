@@ -3,10 +3,75 @@
 ///
 
 using System.Net;
+using System.Text;
 
 // URI prefixes are required,
 var prefixes = new string[] { "http://localhost:5000/" };
-var alphabet = System.Text.Encoding.ASCII.GetBytes("0123456789ABCDEF");
+
+void RespondNotFound(HttpListenerContext context)
+{
+	context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+
+	using (var output = context.Response.OutputStream)
+	{
+		output.Write(new byte[]{});
+	}
+}
+
+void RespondArbitraryBytes(HttpListenerContext context, string path)
+{
+	var alphabet = System.Text.Encoding.ASCII.GetBytes("0123456789ABCDEF");
+	var response = context.Response;
+	int contentLength;
+	var resource = path.Substring(path.LastIndexOf('/') + 1); // /rn/leak/\d+
+
+	try
+	{
+		if (!string.IsNullOrEmpty(resource))
+			contentLength = int.Parse(resource);
+		else
+			contentLength = alphabet.Length;
+	}
+	catch (Exception ex)
+	{
+		Console.WriteLine(ex);
+		response.StatusCode = (int)HttpStatusCode.NotFound;
+		contentLength = alphabet.Length;
+	}
+
+	var buffer = new byte[contentLength];
+	for (var i = 0; i < buffer.Length; i++)
+		buffer[i] = alphabet[i % alphabet.Length];
+
+	// Get a response stream and write the response to it.
+	response.ContentLength64 = buffer.Length;
+
+	using (var output = response.OutputStream)
+	{
+		output.Write(buffer, 0, buffer.Length);
+	}
+}
+
+void RespondToFormUpload(HttpListenerContext context)
+{
+	var buffer = new byte[1024 * 1024];
+	var body = new byte[0];
+	using (var input = context.Request.InputStream)
+	{
+		int read = 0;
+		while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+		{
+			Array.Resize(ref body, body.Length + read);
+			Array.Copy(buffer, 0, body, body.Length - read, read);
+		}
+	}
+
+	context.Response.StatusCode = (int)HttpStatusCode.OK;
+	using (var output = context.Response.OutputStream)
+	{
+		output.Write(body);
+	}
+}
 
 // Create a listener.
 using (var listener = new HttpListener())
@@ -25,38 +90,33 @@ using (var listener = new HttpListener())
 		var context = listener.GetContext();
 
 		// Construct a response.
-		var response = context.Response;
-		var request = context.Request;
-		Console.WriteLine(request.Url?.AbsolutePath);
-		int contentLength;
-		var resource = "";
-		if (request.Url is not null)
-			resource = request.Url.AbsolutePath.Replace("/", "");
+		var url = context.Request.Url;
+		Console.WriteLine(url!.AbsolutePath);
 
-		try
+		// Parse resource (path)
+		var normalizedPath = "";
+		foreach (var segment in url!.Segments)
 		{
-			if (!string.IsNullOrEmpty(resource))
-				contentLength = int.Parse(resource);
-			else
-				contentLength = alphabet.Length;
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine(ex);
-			response.StatusCode = (int)HttpStatusCode.NotFound;
-			contentLength = alphabet.Length;
+			if ("/" == segment)
+			{
+				continue;
+			}
+
+			normalizedPath += $"/{segment.TrimEnd('/')}";
 		}
 
-		var buffer = new byte[contentLength];
-		for (var i = 0; i < buffer.Length; i++)
-			buffer[i] = alphabet[i % alphabet.Length];
-
-		// Get a response stream and write the response to it.
-		response.ContentLength64 = buffer.Length;
-
-		using (var output = response.OutputStream)
+		// Route request
+		if (normalizedPath.StartsWith("/rn/leak/"))
 		{
-			output.Write(buffer, 0, buffer.Length);
+			RespondArbitraryBytes(context, normalizedPath);
+		}
+		else if (normalizedPath.StartsWith("/rn/formup"))
+		{
+			RespondToFormUpload(context);
+		}
+		else
+		{
+			RespondNotFound(context);
 		}
 	}
 }
