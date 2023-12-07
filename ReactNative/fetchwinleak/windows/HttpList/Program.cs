@@ -54,22 +54,22 @@ void RespondArbitraryBytes(HttpListenerContext context, string path)
 
 void RespondToFormUpload(HttpListenerContext context)
 {
-	var reqBody = "";
+	var buffer = new byte[1024 * 1024];
+	var body = new byte[0];
 	using (var input = context.Request.InputStream)
 	{
-		var buffer = new byte[1024 * 1024];
 		int read = 0;
-		while (input.CanRead && (read = input.Read(buffer, 0, buffer.Length)) > 0)
+		while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
 		{
-			reqBody += Encoding.UTF8.GetString(buffer, 0, read);
+			Array.Resize(ref body, body.Length + read);
+			Array.Copy(buffer, 0, body, body.Length - read, read);
 		}
 	}
-	Console.WriteLine(reqBody);
 
 	context.Response.StatusCode = (int)HttpStatusCode.OK;
 	using (var output = context.Response.OutputStream)
 	{
-		output.Write(null);
+		output.Write(body);
 	}
 }
 

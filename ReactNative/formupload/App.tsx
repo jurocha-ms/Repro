@@ -13,8 +13,7 @@ import axios from 'axios';
 const App = () => {
 	const [content, setContent] = useState('NOTHING');
 	const [reqId, setReqId] = useState(0);
-	const uri =
-		'http://localhost:5000/rn/formup';
+	const uri = 'http://localhost:5000/rn/formup';
 
 	// const doFetch = async () => {
 	// 	var response = await fetch(uri);
@@ -28,7 +27,7 @@ const App = () => {
 		formData.append('username', 'test');
 
 		//var response = await fetch('https://www.google.com', {body:formData, method:'POST'});
-		var response = await fetch(uri, {body:formData, method:'POST'});
+		var response = await fetch(uri, {body: formData, method: 'POST'});
 		var text = await response.text();
 		setContent(text);
 	};
