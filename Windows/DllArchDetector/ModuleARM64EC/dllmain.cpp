@@ -17,3 +17,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     return TRUE;
 }
 
+const char* MessageARM64() noexcept
+{
+	return "This is ARM64";
+}
