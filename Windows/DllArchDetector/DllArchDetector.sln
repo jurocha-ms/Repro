@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HostApp", "HostApp\HostApp.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModuleX64", "ModuleX64\ModuleX64.vcxproj", "{51D0840E-8137-4D7A-8116-E581E9556A94}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModuleARM64EC", "ModuleARM64EC\ModuleARM64EC.vcxproj", "{FFEE785F-7E6E-42D1-99B6-EBEF0B0495AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64EC = Debug|ARM64EC
@@ -27,6 +29,11 @@ Global
 		{51D0840E-8137-4D7A-8116-E581E9556A94}.Debug|x64.Build.0 = Debug|x64
 		{51D0840E-8137-4D7A-8116-E581E9556A94}.Release|ARM64EC.ActiveCfg = Debug|x64
 		{51D0840E-8137-4D7A-8116-E581E9556A94}.Release|x64.ActiveCfg = Debug|x64
+		{FFEE785F-7E6E-42D1-99B6-EBEF0B0495AF}.Debug|ARM64EC.ActiveCfg = Debug|ARM64EC
+		{FFEE785F-7E6E-42D1-99B6-EBEF0B0495AF}.Debug|ARM64EC.Build.0 = Debug|ARM64EC
+		{FFEE785F-7E6E-42D1-99B6-EBEF0B0495AF}.Debug|x64.ActiveCfg = Debug|ARM64EC
+		{FFEE785F-7E6E-42D1-99B6-EBEF0B0495AF}.Release|ARM64EC.ActiveCfg = Debug|ARM64EC
+		{FFEE785F-7E6E-42D1-99B6-EBEF0B0495AF}.Release|x64.ActiveCfg = Debug|ARM64EC
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
