@@ -4,4 +4,4 @@
 // Windows Header Files
 #include <windows.h>
 
-const char* MessageARM64() noexcept;
+const char* MessageARM64EC() noexcept;

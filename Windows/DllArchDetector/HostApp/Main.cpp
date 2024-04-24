@@ -12,7 +12,7 @@ int main()
 #endif // _M_X64
 
 #ifdef _M_ARM64EC
-	auto messageArm = MessageARM64();
+	auto messageArm = MessageARM64EC();
 	printf("[%s]", messageArm);
 #endif // _M_ARM64EC
 }

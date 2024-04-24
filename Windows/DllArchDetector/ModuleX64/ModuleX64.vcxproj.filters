@@ -31,8 +31,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ModuleX64.def">
-      <Filter>Source Files</Filter>
-    </None>
+    <None Include="ModuleX64.def" />
   </ItemGroup>
 </Project>
