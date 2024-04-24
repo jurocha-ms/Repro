@@ -4,4 +4,4 @@
 // Windows Header Files
 #include <windows.h>
 
-const char* MessageX64() noexcept;
+char const* __cdecl MessageX64(void) noexcept;

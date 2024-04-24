@@ -17,7 +17,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     return TRUE;
 }
 
-const char* MessageX64() noexcept
+char const* __cdecl MessageX64(void) noexcept
 {
 	return "This is X64";
 }
