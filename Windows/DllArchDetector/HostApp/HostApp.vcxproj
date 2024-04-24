@@ -79,6 +79,9 @@
       <Project>{51d0840e-8137-4d7a-8116-e581e9556a94}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ReferenceCopyLocalPaths Include="$(OutDir)..\..\x64\$(Configuration)\ModuleX64.dll" Condition="'$(Platform)'=='ARM64EC'" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
