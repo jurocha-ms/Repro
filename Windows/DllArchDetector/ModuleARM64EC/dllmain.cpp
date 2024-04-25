@@ -6,9 +6,14 @@ BOOL APIENTRY DllMain( HMODULE hModule,
                        LPVOID lpReserved
                      )
 {
+    int x = 1;
+    int y = 2;
+    int z = 0;
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
+        z = x + y;
+        break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:
