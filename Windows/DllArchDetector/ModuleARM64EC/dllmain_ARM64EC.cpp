@@ -8,15 +8,20 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 {
     int x = 1;
     int y = 2;
-    int z = 0;
+    int z;
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        z = x + y;
+        z = 0;
         break;
     case DLL_THREAD_ATTACH:
+		z = 1;
+		break;
     case DLL_THREAD_DETACH:
+		z = 2;
+		break;
     case DLL_PROCESS_DETACH:
+		z = 3;
         break;
     }
     return TRUE;
