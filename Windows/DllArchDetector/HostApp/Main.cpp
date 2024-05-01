@@ -16,43 +16,52 @@
 
 bool DumpForArch(WORD arch)
 {
+    const char* message;
+    const char* moduleName;
     switch (arch)
     {
         case IMAGE_FILE_MACHINE_AMD64:
-            return true;
+            moduleName = "ModuleX64.dll";
+            message = MessageX64();
+            break;
         case IMAGE_FILE_MACHINE_ARM64EC:
-            return true;
+            moduleName = "ModuleARM64EC.dll";
+            message = MessageARM64EC();
+            break;
         default:
+            printf("[FAIL] Unknown arch: [%X]\n", arch);
             return false;
     }
+
+    printf("[DLL]: [%s]\n", message);
+
+    auto loaded = ImageLoad(moduleName, nullptr);
+    if (!loaded)
+    {
+        printf("[FAIL] Module [%s] not loaded!\n", moduleName);
+        return false;
+    }
+
+    auto mach = loaded->FileHeader->FileHeader.Machine;
+    printf("Machine for [%s]: [%X]\n", moduleName, mach);
+
+    auto unloaded = ImageUnload(loaded);
+    if (!unloaded)
+    {
+        printf("[WARN] Failed to unload %s\n", moduleName);
+    }
+
+    return true;
 }
 
 int main()
 {
 // https://techcommunity.microsoft.com/t5/windows-os-platform-blog/getting-to-know-arm64ec-defines-and-intrinsic-functions/ba-p/2957235
 #ifdef _M_X64
-	auto messageIntel = MessageX64();
-	printf("[%s]\n", messageIntel);
+    DumpForArch(IMAGE_FILE_MACHINE_AMD64);
 #endif // _M_X64
 
 #ifdef _M_ARM64EC
-	auto messageArm = MessageARM64EC();
-	printf("[%s]\n", messageArm);
+    DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
 #endif // _M_ARM64EC
-
-    auto loaded = ImageLoad("ModuleX64.dll", nullptr);
-    if (!loaded)
-    {
-        printf("[FAAAAAAIL] ModuleX64 not loaded!");
-        return 1;
-    }
-
-    auto arch = loaded->FileHeader->FileHeader.Machine;
-    printf("Machine for ModuleX64: [%u]", arch);
-
-    auto unloaded = ImageUnload(loaded);
-    if (!unloaded)
-    {
-        printf("[WARN] Failed to unload ModuleX64");
-    }
 }
