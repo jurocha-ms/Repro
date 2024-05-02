@@ -1,5 +1,6 @@
 #include "../ModuleARM64EC/ModuleARM64EC.h"
 #include "../ModuleX64/ModuleX64.h"
+#include "../ModuleARM64/ModuleARM64.h"
 
 #include <ImageHlp.h>
 
@@ -48,6 +49,11 @@ bool DumpForArch(WORD arch)
             moduleName = "ModuleARM64EC.dll";
             message = MessageARM64EC();
             break;
+        case IMAGE_FILE_MACHINE_ARM64:
+            moduleName = "ModuleARM64.dll";
+            message = MessageARM64();
+            break;
+
         default:
             printf("[FAIL] Unknown arch: [%X]\n", arch);
             return false;
@@ -127,6 +133,6 @@ int main()
 #endif // _M_ARM64EC
 
 #ifdef _M_ARM64
-
+    DumpForArch(IMAGE_FILE_MACHINE_ARM64);
 #endif // _M_ARM64
 }
