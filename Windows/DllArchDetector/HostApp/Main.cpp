@@ -14,6 +14,8 @@
 #define IMAGE_FILE_MACHINE_ARM64X            0xA64E
 #endif
 
+typedef NTSTATUS (* PGIFM)(PCWSTR, PUSHORT);
+
 bool DumpForArch(WORD arch)
 {
     const char* message;
@@ -51,15 +53,26 @@ bool DumpForArch(WORD arch)
         printf("[WARN] Failed to unload %s\n", moduleName);
     }
 
+    auto ntdllModule = LoadLibrary(L"NTDLL");
+    if (!ntdllModule)
+    {
+        //TODO: Error message
+        return 1;
+    }
+    auto getImageFileMachines = (PGIFM)GetProcAddress(ntdllModule, "RtlGetImageFileMachines");
+    PCWSTR fullName = L"C:\\Path\\To\\ModuleARM64EC.dll";
+    USHORT fileMachs { 0 };
+    auto gifmStatus = getImageFileMachines(fullName, &fileMachs);
+
     return true;
 }
 
 int main()
 {
 // https://techcommunity.microsoft.com/t5/windows-os-platform-blog/getting-to-know-arm64ec-defines-and-intrinsic-functions/ba-p/2957235
-#ifdef _M_X64
-    DumpForArch(IMAGE_FILE_MACHINE_AMD64);
-#endif // _M_X64
+//#ifdef _M_X64
+//    DumpForArch(IMAGE_FILE_MACHINE_AMD64);
+//#endif // _M_X64
 
 #ifdef _M_ARM64EC
     DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
