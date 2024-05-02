@@ -55,7 +55,7 @@ bool DumpForArch(WORD arch)
             break;
 
         default:
-            printf("[FAIL] Unknown arch: [%X]\n", arch);
+            printf("[FAIL] Unknown arch: [0x%X]\n", arch);
             return false;
     }
 
@@ -69,7 +69,7 @@ bool DumpForArch(WORD arch)
     }
 
     auto mach = loaded->FileHeader->FileHeader.Machine;
-    printf("Machine for [%s]: [%X]\n", moduleName, mach);
+    printf("Machine for [%s]: [0x%X]\n", moduleName, mach);
 
     // Look for "special" sections
     bool hasA64Xrm { false };
