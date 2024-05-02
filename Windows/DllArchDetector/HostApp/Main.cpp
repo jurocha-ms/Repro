@@ -65,6 +65,17 @@ bool DumpForArch(WORD arch)
     auto mach = loaded->FileHeader->FileHeader.Machine;
     printf("Machine for [%s]: [%X]\n", moduleName, mach);
 
+    // Look for "special" sections
+    bool hasA64Xrm { false };
+    for (int i = 0; i < loaded->NumberOfSections; i++)
+    {
+        auto name = reinterpret_cast<const char*>(loaded->Sections[i].Name);
+        if (std::string(name) == ".a64xrm")
+        {
+            hasA64Xrm = true;
+        }
+    }
+
     auto unloaded = ImageUnload(loaded);
     if (!unloaded)
     {
