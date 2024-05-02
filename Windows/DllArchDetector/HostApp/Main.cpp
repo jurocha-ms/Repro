@@ -37,21 +37,21 @@ typedef NTSTATUS (* PGIFM)(PCWSTR, RtlGetImageFileMachinesOutput*);
 
 bool DumpForArch(WORD arch)
 {
-    const char* message;
+    const char* message = "NONE";
     const char* moduleName;
     switch (arch)
     {
         case IMAGE_FILE_MACHINE_AMD64:
             moduleName = "ModuleX64.dll";
-            message = MessageX64();
+            //message = MessageX64();
             break;
         case IMAGE_FILE_MACHINE_ARM64EC:
             moduleName = "ModuleARM64EC.dll";
-            message = MessageARM64EC();
+            //message = MessageARM64EC();
             break;
         case IMAGE_FILE_MACHINE_ARM64:
             moduleName = "ModuleARM64.dll";
-            message = MessageARM64();
+            //message = MessageARM64();
             break;
 
         default:
