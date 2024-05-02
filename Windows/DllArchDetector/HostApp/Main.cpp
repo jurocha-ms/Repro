@@ -18,19 +18,11 @@
 
 struct RtlGetImageFileMachinesOutput
 {
-    union
-    {
-        ULONG Value;
-
-        struct
-        {
-            ULONG X86 : 1;
-            ULONG X64 : 1;
-            ULONG ARM : 1;
-            ULONG ARM64 : 1;
-            ULONG ARM64EC : 1;
-        };
-    };
+    ULONG X86 : 1;
+    ULONG X64 : 1;
+    ULONG ARM : 1;
+    ULONG ARM64 : 1;
+    ULONG ARM64EC : 1;
 };
 
 typedef NTSTATUS (* PGIFM)(PCWSTR, RtlGetImageFileMachinesOutput*);
@@ -68,6 +60,7 @@ bool DumpForArch(WORD arch)
         return false;
     }
 
+    printf("From ImageLoad:\n");
     auto mach = loaded->FileHeader->FileHeader.Machine;
     printf("Machine for [%s]: [0x%X]\n", moduleName, mach);
 
@@ -92,6 +85,7 @@ bool DumpForArch(WORD arch)
     {
         printf("[WARN] Failed to unload %s\n", moduleName);
     }
+    printf("\n");
 
     auto ntdllModule = LoadLibrary(L"NTDLL");
     if (!ntdllModule)
@@ -119,8 +113,13 @@ bool DumpForArch(WORD arch)
     auto isArm = fileMachs.ARM;
     auto isX64 = fileMachs.X64;
     auto isX86 = fileMachs.X86;
-    auto value = fileMachs.Value;
-    //TODO: Format and print.
+
+    printf("From RtlGetImageFileMachines:\n");
+    printf("Contains x86:     [%d]\n", fileMachs.X86);
+    printf("Contains x64:     [%d]\n", fileMachs.X64);
+    printf("Contains ARM:     [%d]\n", fileMachs.ARM);
+    printf("Contains ARM64:   [%d]\n", fileMachs.ARM64);
+    printf("Contains ARM64EC: [%d]\n", fileMachs.ARM64EC);
 
     printf("\n");
     return true;
