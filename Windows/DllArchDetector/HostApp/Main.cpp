@@ -4,6 +4,7 @@
 #include <ImageHlp.h>
 
 #include <cstdio>
+#include <string>
 
 // See https://ntdoc.m417z.com/
 #ifndef IMAGE_FILE_MACHINE_ARM64EC
@@ -14,7 +15,24 @@
 #define IMAGE_FILE_MACHINE_ARM64X            0xA64E
 #endif
 
-typedef NTSTATUS (* PGIFM)(PCWSTR, PUSHORT);
+struct RtlGetImageFileMachinesOutput
+{
+    union
+    {
+        ULONG Value;
+
+        struct
+        {
+            ULONG X86 : 1;
+            ULONG X64 : 1;
+            ULONG ARM : 1;
+            ULONG ARM64 : 1;
+            ULONG ARM64EC : 1;
+        };
+    };
+};
+
+typedef NTSTATUS (* PGIFM)(PCWSTR, RtlGetImageFileMachinesOutput*);
 
 bool DumpForArch(WORD arch)
 {
@@ -60,9 +78,27 @@ bool DumpForArch(WORD arch)
         return 1;
     }
     auto getImageFileMachines = (PGIFM)GetProcAddress(ntdllModule, "RtlGetImageFileMachines");
-    PCWSTR fullName = L"C:\\Path\\To\\ModuleARM64EC.dll";
-    USHORT fileMachs { 0 };
-    auto gifmStatus = getImageFileMachines(fullName, &fileMachs);
+
+    RtlGetImageFileMachinesOutput fileMachs { 0 };
+    auto modulePathLength = strlen(loaded->ModuleName);
+    std::wstring modulePath {};
+    modulePath.resize(modulePathLength);
+    auto convertSize = MultiByteToWideChar(
+        CP_UTF8,
+        /*dwFlags*/0,
+        loaded->ModuleName,
+        modulePathLength,
+        (LPWSTR)modulePath.c_str(),
+        modulePathLength);
+
+    auto gifmStatus = getImageFileMachines(modulePath.c_str(), &fileMachs);
+    auto isArm64Ec = fileMachs.ARM64EC;
+    auto isArm64 = fileMachs.ARM64;
+    auto isArm = fileMachs.ARM;
+    auto isX64 = fileMachs.X64;
+    auto isX86 = fileMachs.X86;
+    auto value = fileMachs.Value;
+    //TODO: Format and print.
 
     return true;
 }
@@ -70,9 +106,9 @@ bool DumpForArch(WORD arch)
 int main()
 {
 // https://techcommunity.microsoft.com/t5/windows-os-platform-blog/getting-to-know-arm64ec-defines-and-intrinsic-functions/ba-p/2957235
-//#ifdef _M_X64
-//    DumpForArch(IMAGE_FILE_MACHINE_AMD64);
-//#endif // _M_X64
+#ifdef _M_X64
+    DumpForArch(IMAGE_FILE_MACHINE_AMD64);
+#endif // _M_X64
 
 #ifdef _M_ARM64EC
     DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
