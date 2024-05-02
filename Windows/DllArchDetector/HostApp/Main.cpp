@@ -125,4 +125,8 @@ int main()
 #ifdef _M_ARM64EC
     DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
 #endif // _M_ARM64EC
+
+#ifdef _M_ARM64
+
+#endif // _M_ARM64
 }
