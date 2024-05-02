@@ -101,6 +101,7 @@ bool DumpForArch(WORD arch)
     //TODO: Format and print.
 
     return true;
+    //TODO: cLEAN UP.
 }
 
 int main()
