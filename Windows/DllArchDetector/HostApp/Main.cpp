@@ -59,7 +59,7 @@ bool DumpForArch(WORD arch)
             return false;
     }
 
-    printf("[DLL]: [%s]\n", message);
+    //printf("[DLL]: [%s]\n", message);
 
     auto loaded = ImageLoad(moduleName, nullptr);
     if (!loaded)
@@ -82,6 +82,11 @@ bool DumpForArch(WORD arch)
         }
     }
 
+    if (hasA64Xrm)
+    {
+        printf("Has ARM64X section: [%s]\n", hasA64Xrm ? "TRUE" : "FALSE");
+    }
+
     auto unloaded = ImageUnload(loaded);
     if (!unloaded)
     {
@@ -91,7 +96,7 @@ bool DumpForArch(WORD arch)
     auto ntdllModule = LoadLibrary(L"NTDLL");
     if (!ntdllModule)
     {
-        //TODO: Error message
+        printf("[FAIL] could not load NTDLL\n");
         return 1;
     }
     auto getImageFileMachines = (PGIFM)GetProcAddress(ntdllModule, "RtlGetImageFileMachines");
@@ -117,8 +122,8 @@ bool DumpForArch(WORD arch)
     auto value = fileMachs.Value;
     //TODO: Format and print.
 
+    printf("\n");
     return true;
-    //TODO: cLEAN UP.
 }
 
 int main()
