@@ -107,12 +107,8 @@ bool DumpForArch(WORD arch)
         (LPWSTR)modulePath.c_str(),
         modulePathLength);
 
+    // Crashes on ARM64 when invoked from file share
     auto gifmStatus = getImageFileMachines(modulePath.c_str(), &fileMachs);
-    auto isArm64Ec = fileMachs.ARM64EC;
-    auto isArm64 = fileMachs.ARM64;
-    auto isArm = fileMachs.ARM;
-    auto isX64 = fileMachs.X64;
-    auto isX86 = fileMachs.X86;
 
     printf("From RtlGetImageFileMachines:\n");
     printf("Contains x86:     [%d]\n", fileMachs.X86);
