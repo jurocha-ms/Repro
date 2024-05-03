@@ -66,7 +66,7 @@ bool DumpForArch(WORD arch)
 
     // Look for "special" sections
     bool hasA64Xrm { false };
-    for (int i = 0; i < loaded->NumberOfSections; i++)
+    for (size_t i = 0; i < loaded->NumberOfSections; i++)
     {
         auto name = reinterpret_cast<const char*>(loaded->Sections[i].Name);
         if (std::string(name) == ".a64xrm")
@@ -96,7 +96,7 @@ bool DumpForArch(WORD arch)
     auto getImageFileMachines = (PGIFM)GetProcAddress(ntdllModule, "RtlGetImageFileMachines");
 
     RtlGetImageFileMachinesOutput fileMachs { 0 };
-    auto modulePathLength = strlen(loaded->ModuleName);
+    auto modulePathLength = static_cast<int>(strlen(loaded->ModuleName));
     std::wstring modulePath {};
     modulePath.resize(modulePathLength);
     auto convertSize = MultiByteToWideChar(
