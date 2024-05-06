@@ -176,22 +176,22 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModuleARM64X\ModuleARM64X.vcxproj" Condition="'$(Platform)'!='ARM64' OR '$(Platform)'=='ARM64EC'">
+    <ProjectReference Include="..\ModuleARM64X\ModuleARM64X.vcxproj" Condition="'$(Platform)'!='ARM64' OR '$(Platform)'=='ARM64EC' OR '$(Platform)'=='x64'">
       <Project>{e1994ae4-9e26-42f5-aa57-50f38721ee85}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\ModuleARM64EC\ModuleARM64EC.vcxproj" Condition="'$(Platform)'=='ARM64EC'">
+    <ProjectReference Include="..\ModuleARM64EC\ModuleARM64EC.vcxproj" Condition="'$(Platform)'=='ARM64EC' OR '$(Platform)'=='x64'">
       <Project>{ffee785f-7e6e-42d1-99b6-ebef0b0495af}</Project>
     </ProjectReference>
     <ProjectReference Include="..\ModuleARM64\ModuleARM64.vcxproj" Condition="'$(Platform)'=='ARM64'">
       <Project>{85d9f099-d158-47cd-9c0f-13567eccbc77}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\ModuleX64\ModuleX64.vcxproj" Condition="'$(Platform)'=='ARM64EC'">
+    <ProjectReference Include="..\ModuleX64\ModuleX64.vcxproj" Condition="'$(Platform)'=='ARM64EC' OR '$(Platform)'=='x64'">
       <Project>{51d0840e-8137-4d7a-8116-e581e9556a94}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ReferenceCopyLocalPaths Include="$(OutDir)..\..\x64\$(Configuration)\ModuleX64.dll" Condition="'$(Platform)'=='ARM64EC'" />
-    <ReferenceCopyLocalPaths Include="$(OutDir)..\..\ARM64EC\$(Configuration)\ModuleARM64X.dll" Condition="'$(Platform)'=='ARM64'" />
+    <ReferenceCopyLocalPaths Include="$(OutDir)..\..\x64\$(Configuration)\ModuleX64.dll" Condition="'$(Platform)'=='ARM64EC' OR '$(Platform)'=='x64'" />
+    <ReferenceCopyLocalPaths Include="$(OutDir)..\..\ARM64EC\$(Configuration)\ModuleARM64X.dll" Condition="'$(Platform)'=='ARM64' OR '$(Platform)'=='x64'" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -79,10 +79,7 @@ bool DumpForArch(WORD arch)
         }
     }
 
-    if (hasA64Xrm)
-    {
-        printf("Has .a64xrm section: [%s]\n", hasA64Xrm ? "TRUE" : "FALSE");
-    }
+    printf("Has .a64xrm section: [%s]\n", hasA64Xrm ? "TRUE" : "FALSE");
 
     auto unloaded = ImageUnload(loaded);
     if (!unloaded)
@@ -95,7 +92,7 @@ bool DumpForArch(WORD arch)
     if (!ntdllModule)
     {
         printf("[FAIL] could not load NTDLL\n");
-        return 1;
+        return false;
     }
     auto getImageFileMachines = (PGIFM)GetProcAddress(ntdllModule, "RtlGetImageFileMachines");
 
@@ -130,6 +127,8 @@ int main()
 // https://techcommunity.microsoft.com/t5/windows-os-platform-blog/getting-to-know-arm64ec-defines-and-intrinsic-functions/ba-p/2957235
 #ifdef _M_X64
     DumpForArch(IMAGE_FILE_MACHINE_AMD64);
+    DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
+    DumpForArch(IMAGE_FILE_MACHINE_ARM64X);
 #endif // _M_X64
 
 #ifdef _M_ARM64EC
