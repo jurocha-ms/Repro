@@ -1,6 +1,7 @@
-#include "../ModuleARM64EC/ModuleARM64EC.h"
-#include "../ModuleX64/ModuleX64.h"
 #include "../ModuleARM64/ModuleARM64.h"
+#include "../ModuleARM64EC/ModuleARM64EC.h"
+#include "../ModuleARM64X/ModuleARM64X.h"
+#include "../ModuleX64/ModuleX64.h"
 
 #include <ImageHlp.h>
 
@@ -37,13 +38,16 @@ bool DumpForArch(WORD arch)
             moduleName = "ModuleX64.dll";
             //message = MessageX64();
             break;
+        case IMAGE_FILE_MACHINE_ARM64:
+            moduleName = "ModuleARM64.dll";
+            //message = MessageARM64();
+            break;
         case IMAGE_FILE_MACHINE_ARM64EC:
             moduleName = "ModuleARM64EC.dll";
             //message = MessageARM64EC();
             break;
-        case IMAGE_FILE_MACHINE_ARM64:
-            moduleName = "ModuleARM64.dll";
-            //message = MessageARM64();
+        case IMAGE_FILE_MACHINE_ARM64X:
+            moduleName = "ModuleARM64X.dll";
             break;
 
         default:
@@ -130,9 +134,13 @@ int main()
 
 #ifdef _M_ARM64EC
     DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
+    DumpForArch(IMAGE_FILE_MACHINE_ARM64X);
 #endif // _M_ARM64EC
 
 #ifdef _M_ARM64
     DumpForArch(IMAGE_FILE_MACHINE_ARM64);
+    DumpForArch(IMAGE_FILE_MACHINE_ARM64X);
 #endif // _M_ARM64
+
+    return EXIT_SUCCESS;
 }
