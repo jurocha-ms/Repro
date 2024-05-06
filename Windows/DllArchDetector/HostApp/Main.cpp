@@ -51,7 +51,7 @@ bool DumpForArch(WORD arch)
             break;
 
         default:
-            printf("[FAIL] Unknown arch: [0x%X]\n", arch);
+            printf("[FAIL] Unknown arch: [0x%X]\n\n", arch);
             return false;
     }
 
@@ -60,7 +60,7 @@ bool DumpForArch(WORD arch)
     auto loaded = ImageLoad(moduleName, nullptr);
     if (!loaded)
     {
-        printf("[FAIL] Module [%s] not loaded!\n", moduleName);
+        printf("[FAIL] Module [%s] not loaded!\n\n", moduleName);
         return false;
     }
 
@@ -125,21 +125,20 @@ bool DumpForArch(WORD arch)
 int main()
 {
 // https://techcommunity.microsoft.com/t5/windows-os-platform-blog/getting-to-know-arm64ec-defines-and-intrinsic-functions/ba-p/2957235
+#ifdef _M_ARM64
+    DumpForArch(IMAGE_FILE_MACHINE_ARM64);
+#endif // _M_ARM64
+
+#ifdef _M_ARM64EC
+    // Implies _M_X64
+#endif // _M_ARM64EC
+
 #ifdef _M_X64
     DumpForArch(IMAGE_FILE_MACHINE_AMD64);
     DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
-    DumpForArch(IMAGE_FILE_MACHINE_ARM64X);
 #endif // _M_X64
 
-#ifdef _M_ARM64EC
-    DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
-    DumpForArch(IMAGE_FILE_MACHINE_ARM64X);
-#endif // _M_ARM64EC
-
-#ifdef _M_ARM64
-    DumpForArch(IMAGE_FILE_MACHINE_ARM64);
-    DumpForArch(IMAGE_FILE_MACHINE_ARM64X);
-#endif // _M_ARM64
+DumpForArch(IMAGE_FILE_MACHINE_ARM64X);
 
     return EXIT_SUCCESS;
 }
