@@ -81,7 +81,7 @@ bool DumpForArch(WORD arch)
 
     if (hasA64Xrm)
     {
-        printf("Has ARM64X section: [%s]\n", hasA64Xrm ? "TRUE" : "FALSE");
+        printf("Has .a64xrm section: [%s]\n", hasA64Xrm ? "TRUE" : "FALSE");
     }
 
     auto unloaded = ImageUnload(loaded);
