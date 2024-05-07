@@ -30,21 +30,17 @@ typedef NTSTATUS (* PGIFM)(PCWSTR, RtlGetImageFileMachinesOutput*);
 
 bool DumpForArch(WORD arch)
 {
-    const char* message = "NONE";
     const char* moduleName;
     switch (arch)
     {
         case IMAGE_FILE_MACHINE_AMD64:
             moduleName = "ModuleX64.dll";
-            //message = MessageX64();
             break;
         case IMAGE_FILE_MACHINE_ARM64:
             moduleName = "ModuleARM64.dll";
-            //message = MessageARM64();
             break;
         case IMAGE_FILE_MACHINE_ARM64EC:
             moduleName = "ModuleARM64EC.dll";
-            //message = MessageARM64EC();
             break;
         case IMAGE_FILE_MACHINE_ARM64X:
             moduleName = "ModuleARM64X.dll";
@@ -55,18 +51,20 @@ bool DumpForArch(WORD arch)
             return false;
     }
 
-    //printf("[DLL]: [%s]\n", message);
-
     auto loaded = ImageLoad(moduleName, nullptr);
     if (!loaded)
     {
         printf("[FAIL] Module [%s] not loaded!\n\n", moduleName);
         return false;
     }
+    else
+    {
+        printf("For module [%s]\n", moduleName);
+    }
 
     printf("From ImageLoad:\n");
     auto mach = loaded->FileHeader->FileHeader.Machine;
-    printf("Machine for [%s]: [0x%X]\n", moduleName, mach);
+    printf("%20s: [0x%X]\n", "Machine", mach);
 
     // Look for "special" sections
     bool hasA64Xrm { false };
@@ -79,7 +77,7 @@ bool DumpForArch(WORD arch)
         }
     }
 
-    printf("Has .a64xrm section: [%s]\n", hasA64Xrm ? "TRUE" : "FALSE");
+    printf("%20s: [%s]\n", "Has .a64xrm section", hasA64Xrm ? "TRUE" : "FALSE");
 
     auto unloaded = ImageUnload(loaded);
     if (!unloaded)
@@ -112,11 +110,11 @@ bool DumpForArch(WORD arch)
     auto gifmStatus = getImageFileMachines(modulePath.c_str(), &fileMachs);
 
     printf("From RtlGetImageFileMachines:\n");
-    printf("Contains x86:     [%d]\n", fileMachs.X86);
-    printf("Contains x64:     [%d]\n", fileMachs.X64);
-    printf("Contains ARM:     [%d]\n", fileMachs.ARM);
-    printf("Contains ARM64:   [%d]\n", fileMachs.ARM64);
-    printf("Contains ARM64EC: [%d]\n", fileMachs.ARM64EC);
+    printf("%20s: [%d]\n", "Contains x86", fileMachs.X86);
+    printf("%20s: [%d]\n", "Contains x64", fileMachs.X64);
+    printf("%20s: [%d]\n", "Contains ARM", fileMachs.ARM);
+    printf("%20s: [%d]\n", "Contains ARM64", fileMachs.ARM64);
+    printf("%20s: [%d]\n", "Contains ARM64EC", fileMachs.ARM64EC);
 
     printf("\n");
     return true;
