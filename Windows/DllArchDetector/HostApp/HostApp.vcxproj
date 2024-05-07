@@ -191,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <ReferenceCopyLocalPaths Include="$(OutDir)..\..\x64\$(Configuration)\ModuleX64.dll" Condition="'$(Platform)'=='ARM64EC' OR '$(Platform)'=='x64'" />
+    <ReferenceCopyLocalPaths Include="$(OutDir)..\..\ARM64EC\$(Configuration)\ModuleARM64EC.dll" Condition="'$(Platform)'=='x64'" />
     <ReferenceCopyLocalPaths Include="$(OutDir)..\..\ARM64EC\$(Configuration)\ModuleARM64X.dll" Condition="'$(Platform)'=='ARM64' OR '$(Platform)'=='x64'" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
