@@ -78,12 +78,6 @@ bool DumpForArch(WORD arch)
     }
 
     printf("%20s: [%s]\n", "Has .a64xrm section", hasA64Xrm ? "TRUE" : "FALSE");
-
-    auto unloaded = ImageUnload(loaded);
-    if (!unloaded)
-    {
-        printf("[WARN] Failed to unload %s\n", moduleName);
-    }
     printf("\n");
 
     auto ntdllModule = LoadLibrary(L"NTDLL");
@@ -105,6 +99,12 @@ bool DumpForArch(WORD arch)
         modulePathLength,
         (LPWSTR)modulePath.c_str(),
         modulePathLength);
+
+    auto unloaded = ImageUnload(loaded);
+    if (!unloaded)
+    {
+        printf("[WARN] Failed to unload %s\n", moduleName);
+    }
 
     // Crashes on ARM64 when invoked from file share
     auto gifmStatus = getImageFileMachines(modulePath.c_str(), &fileMachs);
