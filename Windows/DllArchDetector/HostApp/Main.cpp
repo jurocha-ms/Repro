@@ -137,7 +137,7 @@ bool DumpForArch(WORD arch)
     auto dosHeader = reinterpret_cast<IMAGE_DOS_HEADER*>(moduleHandle);
     auto signature = reinterpret_cast<char*>(base + dosHeader->e_lfanew); // PE\0\0
     auto fileHeader = reinterpret_cast<IMAGE_FILE_HEADER*>(signature + 4);
-    if (fileHeader->SizeOfOptionalHeader <= sizeof(IMAGE_OPTIONAL_HEADER)) // Why LESS-THAN??
+    if (fileHeader->SizeOfOptionalHeader < sizeof(IMAGE_OPTIONAL_HEADER)) // Why LESS-THAN??
     {
         printf("[FAIL] No optional header. Can't be an ARM64EC binary.\n\n");
         return false;
@@ -150,7 +150,7 @@ bool DumpForArch(WORD arch)
         printf("[FAIL] Header only has [%d] RVAs. Should be 11.\n\n", optionalHeader->NumberOfRvaAndSizes);
     }
     auto dataDirectory = optionalHeader->DataDirectory[10];
-    if (dataDirectory.Size <= sizeof(IMAGE_LOAD_CONFIG_DIRECTORY)) //Again: <= ???
+    if (dataDirectory.Size < sizeof(IMAGE_LOAD_CONFIG_DIRECTORY)) //Again: <= ???
     {
         printf("[FAIL] No data directory. That could contain a .a64xrm section.\n\n");
         return false;
