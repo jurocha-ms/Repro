@@ -31,3 +31,8 @@ char const* __cdecl MessageX64(void) noexcept
 {
 	return "This is X64";
 }
+
+char const* __cdecl ModuleNameX64(void) noexcept
+{
+    return "ModuleX64.dll";
+}

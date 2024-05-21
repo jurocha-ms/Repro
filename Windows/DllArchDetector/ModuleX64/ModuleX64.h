@@ -5,3 +5,5 @@
 #include <windows.h>
 
 char const* __cdecl MessageX64(void) noexcept;
+
+char const* __cdecl ModuleNameX64(void) noexcept;

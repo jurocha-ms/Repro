@@ -37,3 +37,7 @@ insert_final_newline = false
 indent_size = 2
 end_of_line = crlf
 insert_final_newline = false
+
+# C++ files
+[*.def]
+end_of_line = crlf

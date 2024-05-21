@@ -3,8 +3,11 @@
 #include "../ModuleARM64X/ModuleARM64X.h"
 #include "../ModuleX64/ModuleX64.h"
 
+// Windows API
 #include <ImageHlp.h>
+#include <libloaderapi.h>
 
+#include <cstddef>
 #include <cstdio>
 #include <string>
 
@@ -34,7 +37,8 @@ bool DumpForArch(WORD arch)
     switch (arch)
     {
         case IMAGE_FILE_MACHINE_AMD64:
-            moduleName = "ModuleX64.dll";
+            //moduleName = "ModuleX64.dll";
+            moduleName = ModuleNameX64();
             break;
         case IMAGE_FILE_MACHINE_ARM64:
             moduleName = "ModuleARM64.dll";
@@ -115,8 +119,48 @@ bool DumpForArch(WORD arch)
     printf("%20s: [%d]\n", "Contains ARM", fileMachs.ARM);
     printf("%20s: [%d]\n", "Contains ARM64", fileMachs.ARM64);
     printf("%20s: [%d]\n", "Contains ARM64EC", fileMachs.ARM64EC);
-
     printf("\n");
+
+/*
+ * Manually calculating the properties and header section names using what's already in memory.
+ */
+#pragma region GetModuleHandle
+
+    HMODULE moduleHandle =  GetModuleHandleA(moduleName);
+    if (moduleHandle == nullptr)
+    {
+        printf("[FAIL] Could not load handle for [%s].\n\n", moduleName);
+        return false;
+    }
+
+    auto base = reinterpret_cast<std::byte*>(moduleHandle);
+    auto dosHeader = reinterpret_cast<IMAGE_DOS_HEADER*>(moduleHandle);
+    auto signature = reinterpret_cast<char*>(base + dosHeader->e_lfanew); // PE\0\0
+    auto fileHeader = reinterpret_cast<IMAGE_FILE_HEADER*>(signature + 4);
+    if (fileHeader->SizeOfOptionalHeader <= sizeof(IMAGE_OPTIONAL_HEADER)) // Why LESS-THAN??
+    {
+        printf("[FAIL] No optional header. Can't be an ARM64EC binary.\n\n");
+        return false;
+    }
+    auto optionalHeader = reinterpret_cast<IMAGE_OPTIONAL_HEADER*>(
+        reinterpret_cast<std::byte*>(fileHeader) + sizeof(*fileHeader)
+    );
+    if (optionalHeader->NumberOfRvaAndSizes < 11)
+    {
+        printf("[FAIL] Header only has [%d] RVAs. Should be 11.\n\n", optionalHeader->NumberOfRvaAndSizes);
+    }
+    auto dataDirectory = optionalHeader->DataDirectory[10];
+    if (dataDirectory.Size <= sizeof(IMAGE_LOAD_CONFIG_DIRECTORY)) //Again: <= ???
+    {
+        printf("[FAIL] No data directory. That could contain a .a64xrm section.\n\n");
+        return false;
+    }
+    auto loadConfigDirectory = reinterpret_cast<IMAGE_LOAD_CONFIG_DIRECTORY*>(base + dataDirectory.VirtualAddress);
+
+    auto a = loadConfigDirectory->CHPEMetadataPointer;
+
+#pragma endregion GetModuleHandle
+
     return true;
 }
 
