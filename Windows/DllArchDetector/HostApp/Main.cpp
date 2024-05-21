@@ -4,9 +4,9 @@
 #include "../ModuleX64/ModuleX64.h"
 
 // Windows API
-#include <ImageHlp.h>
+#include <DbgHelp.h>
+//#include <ImageHlp.h>
 #include <libloaderapi.h>
-//#include <DbgHelp.h>
 
 #include <cstddef>
 #include <cstdio>
@@ -30,12 +30,14 @@ struct RtlGetImageFileMachinesOutput
     ULONG ARM64EC : 1;
 };
 
-typedef NTSTATUS (* PGIFM)(PCWSTR, RtlGetImageFileMachinesOutput*);
+//typedef NTSTATUS (* PGIFM)(PCWSTR, RtlGetImageFileMachinesOutput*);
 
 // From DbgHelp.h
+#if 0
 PIMAGE_NT_HEADERS IMAGEAPI ImageNtHeader(
     _In_ PVOID Base
 );
+#endif // 0
 
 bool DumpForArch(WORD arch)
 {
@@ -49,7 +51,8 @@ bool DumpForArch(WORD arch)
             moduleName = "ModuleARM64.dll";
             break;
         case IMAGE_FILE_MACHINE_ARM64EC:
-            moduleName = ModuleNameARM64EC();
+            //moduleName = ModuleNameARM64EC();
+            moduleName = "ModuleARM64EC.dll";
             break;
         case IMAGE_FILE_MACHINE_ARM64X:
             moduleName = "ModuleARM64X.dll";
@@ -60,6 +63,7 @@ bool DumpForArch(WORD arch)
             return false;
     }
 
+#if 0
 #pragma region ImageLoad
 
     auto loaded = ImageLoad(moduleName, nullptr);
@@ -133,51 +137,39 @@ bool DumpForArch(WORD arch)
     printf("\n");
 
 #pragma endregion RtlGetImageFileMachines
+#endif // 0
 
 /*
  * Manually calculating the properties and header section names using what's already in memory.
  */
-#pragma region GetModuleHandle
+#pragma region ImageNtHeader
 
-    HMODULE moduleHandle =  GetModuleHandleA(moduleName);
+    auto moduleHandle =  GetModuleHandleA(moduleName);
     if (moduleHandle == nullptr)
     {
         printf("[FAIL] Could not load handle for [%s].\n\n", moduleName);
         return false;
     }
-
-    auto base = reinterpret_cast<std::byte*>(moduleHandle);
-    auto dosHeader = reinterpret_cast<IMAGE_DOS_HEADER*>(moduleHandle);
-    auto signature = reinterpret_cast<char*>(base + dosHeader->e_lfanew); // PE\0\0
-    auto fileHeader = reinterpret_cast<IMAGE_FILE_HEADER*>(signature + 4);
-    if (fileHeader->SizeOfOptionalHeader < sizeof(IMAGE_OPTIONAL_HEADER)) // Why LESS-THAN??
-    {
-        printf("[FAIL] No optional header. Can't be an ARM64EC binary.\n\n");
-        return false;
-    }
-    auto optionalHeader = reinterpret_cast<IMAGE_OPTIONAL_HEADER*>(
-        reinterpret_cast<std::byte*>(fileHeader) + sizeof(*fileHeader)
-    );
-    if (optionalHeader->NumberOfRvaAndSizes < 11)
-    {
-        printf("[FAIL] Header only has [%d] RVAs. Should be 11.\n\n", optionalHeader->NumberOfRvaAndSizes);
-    }
-    auto dataDirectory = optionalHeader->DataDirectory[10];
-    if (dataDirectory.Size < sizeof(IMAGE_LOAD_CONFIG_DIRECTORY)) //Again: <= ???
-    {
-        printf("[FAIL] No data directory. That could contain a .a64xrm section.\n\n");
-        return false;
-    }
-    auto loadConfigDirectory = reinterpret_cast<IMAGE_LOAD_CONFIG_DIRECTORY*>(base + dataDirectory.VirtualAddress);
-
-    auto a = loadConfigDirectory->CHPEMetadataPointer; // x86/CHPE-only. Useless...
-
     auto ntHeaders = ImageNtHeader(moduleHandle);
-    mach = ntHeaders->FileHeader.Machine;
-    printf("%20s: [0x%X]_\n", "Machine", mach);
-    printf("%20s: [%d]\n", "Number of sections", ntHeaders->FileHeader.NumberOfSections);
+    auto mach = ntHeaders->FileHeader.Machine;
+    printf("%20s: [0x%X]\n", "Machine", mach);
 
-#pragma endregion GetModuleHandle
+    bool hasA64Xrm { false };
+    auto currentSection = IMAGE_FIRST_SECTION(ntHeaders);
+    for (auto i = 0; i < ntHeaders->FileHeader.NumberOfSections; i++, currentSection++)
+    {
+        auto name = reinterpret_cast<const char*>(currentSection->Name);
+        if (std::string(name) == ".a64xrm")
+        {
+            hasA64Xrm = true;
+            break;
+        }
+    }
+
+    printf("%20s: [%s]\n", "Has .a64xrm section", hasA64Xrm ? "TRUE" : "FALSE");
+    printf("\n");
+
+#pragma endregion ImageNtHeader
 
     return true;
 }
@@ -195,7 +187,7 @@ int main()
 
 #ifdef _M_X64
     DumpForArch(IMAGE_FILE_MACHINE_AMD64);
-    DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
+    //DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
 #endif // _M_X64
 
 DumpForArch(IMAGE_FILE_MACHINE_ARM64X);
