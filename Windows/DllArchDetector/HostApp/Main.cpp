@@ -37,14 +37,13 @@ bool DumpForArch(WORD arch)
     switch (arch)
     {
         case IMAGE_FILE_MACHINE_AMD64:
-            //moduleName = "ModuleX64.dll";
             moduleName = ModuleNameX64();
             break;
         case IMAGE_FILE_MACHINE_ARM64:
             moduleName = "ModuleARM64.dll";
             break;
         case IMAGE_FILE_MACHINE_ARM64EC:
-            moduleName = "ModuleARM64EC.dll";
+            moduleName = ModuleNameARM64EC();
             break;
         case IMAGE_FILE_MACHINE_ARM64X:
             moduleName = "ModuleARM64X.dll";
