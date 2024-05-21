@@ -54,6 +54,8 @@ bool DumpForArch(WORD arch)
             return false;
     }
 
+#pragma region ImageLoad
+
     auto loaded = ImageLoad(moduleName, nullptr);
     if (!loaded)
     {
@@ -83,13 +85,17 @@ bool DumpForArch(WORD arch)
     printf("%20s: [%s]\n", "Has .a64xrm section", hasA64Xrm ? "TRUE" : "FALSE");
     printf("\n");
 
+#pragma endregion ImageLoad
+
+#pragma region RtlGetImageFileMachines
+
     auto ntdllModule = LoadLibrary(L"NTDLL");
     if (!ntdllModule)
     {
         printf("[FAIL] could not load NTDLL\n");
         return false;
     }
-    auto getImageFileMachines = (PGIFM)GetProcAddress(ntdllModule, "RtlGetImageFileMachines");
+    auto getImageFileMachines = (PGIFM) GetProcAddress(ntdllModule, "RtlGetImageFileMachines");
 
     RtlGetImageFileMachinesOutput fileMachs { 0 };
     auto modulePathLength = static_cast<int>(strlen(loaded->ModuleName));
@@ -100,8 +106,10 @@ bool DumpForArch(WORD arch)
         /*dwFlags*/0,
         loaded->ModuleName,
         modulePathLength,
-        (LPWSTR)modulePath.c_str(),
+        (LPWSTR) modulePath.c_str(),
         modulePathLength);
+
+#pragma endregion RtlGetImageFileMachines
 
     auto unloaded = ImageUnload(loaded);
     if (!unloaded)
