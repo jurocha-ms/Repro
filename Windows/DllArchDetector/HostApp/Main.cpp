@@ -6,6 +6,7 @@
 // Windows API
 #include <ImageHlp.h>
 #include <libloaderapi.h>
+//#include <DbgHelp.h>
 
 #include <cstddef>
 #include <cstdio>
@@ -30,6 +31,11 @@ struct RtlGetImageFileMachinesOutput
 };
 
 typedef NTSTATUS (* PGIFM)(PCWSTR, RtlGetImageFileMachinesOutput*);
+
+// From DbgHelp.h
+PIMAGE_NT_HEADERS IMAGEAPI ImageNtHeader(
+    _In_ PVOID Base
+);
 
 bool DumpForArch(WORD arch)
 {
@@ -109,8 +115,6 @@ bool DumpForArch(WORD arch)
         (LPWSTR) modulePath.c_str(),
         modulePathLength);
 
-#pragma endregion RtlGetImageFileMachines
-
     auto unloaded = ImageUnload(loaded);
     if (!unloaded)
     {
@@ -127,6 +131,8 @@ bool DumpForArch(WORD arch)
     printf("%20s: [%d]\n", "Contains ARM64", fileMachs.ARM64);
     printf("%20s: [%d]\n", "Contains ARM64EC", fileMachs.ARM64EC);
     printf("\n");
+
+#pragma endregion RtlGetImageFileMachines
 
 /*
  * Manually calculating the properties and header section names using what's already in memory.
@@ -164,7 +170,12 @@ bool DumpForArch(WORD arch)
     }
     auto loadConfigDirectory = reinterpret_cast<IMAGE_LOAD_CONFIG_DIRECTORY*>(base + dataDirectory.VirtualAddress);
 
-    auto a = loadConfigDirectory->CHPEMetadataPointer;
+    auto a = loadConfigDirectory->CHPEMetadataPointer; // x86/CHPE-only. Useless...
+
+    auto ntHeaders = ImageNtHeader(moduleHandle);
+    mach = ntHeaders->FileHeader.Machine;
+    printf("%20s: [0x%X]_\n", "Machine", mach);
+    printf("%20s: [%d]\n", "Number of sections", ntHeaders->FileHeader.NumberOfSections);
 
 #pragma endregion GetModuleHandle
 
