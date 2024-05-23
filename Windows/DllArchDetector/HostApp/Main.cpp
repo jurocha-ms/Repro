@@ -139,22 +139,21 @@ bool DumpForArch(WORD arch)
 #pragma endregion RtlGetImageFileMachines
 #endif // 0
 
-/*
- * Manually calculating the properties and header section names using what's already in memory.
- */
-#pragma region ImageNtHeader
-
     auto moduleHandle =  GetModuleHandleA(moduleName);
     if (moduleHandle == nullptr)
     {
         printf("[FAIL] Could not load handle for [%s].\n\n", moduleName);
         return false;
     }
+    bool hasA64Xrm { false };
+
+#pragma region ImageNtHeader
+
+#if 0
     auto ntHeaders = ImageNtHeader(moduleHandle);
     auto mach = ntHeaders->FileHeader.Machine;
     printf("%20s: [0x%X]\n", "Machine", mach);
 
-    bool hasA64Xrm { false };
     auto currentSection = IMAGE_FIRST_SECTION(ntHeaders);
     for (auto i = 0; i < ntHeaders->FileHeader.NumberOfSections; i++, currentSection++)
     {
@@ -168,8 +167,57 @@ bool DumpForArch(WORD arch)
 
     printf("%20s: [%s]\n", "Has .a64xrm section", hasA64Xrm ? "TRUE" : "FALSE");
     printf("\n");
+#endif // 0
 
 #pragma endregion ImageNtHeader
+
+/*
+ * Manually calculating the properties and header section names using what's already in memory.
+ * Do this when DbgHelp or ImageHlp DLLs can't be used.
+ */
+#pragma region Manual Scanning
+
+    //auto base = reinterpret_cast<std::byte*>(moduleHandle);
+    auto dosHeader = reinterpret_cast<IMAGE_DOS_HEADER*>(moduleHandle);
+    //auto signature = reinterpret_cast<char*>(base + dosHeader->e_lfanew); // "PE\0\0"
+    //auto fileHeader = reinterpret_cast<IMAGE_FILE_HEADER*>(signature + 4);
+    //if (fileHeader->SizeOfOptionalHeader < sizeof(IMAGE_OPTIONAL_HEADER))
+    //{
+    //    // No optional header => not an ARM64EC image
+    //    return true;
+    //}
+    //auto optionalHeader = reinterpret_cast<IMAGE_OPTIONAL_HEADER*>(
+    //    reinterpret_cast<std::byte*>(fileHeader) + sizeof(*fileHeader)
+    //);
+    //if (optionalHeader->NumberOfRvaAndSizes < 11)
+    //{
+    //    // Ensure IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG is available
+    //    return true;
+    //}
+    //auto dataDirectory = optionalHeader->DataDirectory[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG];
+    //if (dataDirectory.Size < sizeof(IMAGE_LOAD_CONFIG_DIRECTORY))
+    //{
+    //    return true;
+    //}
+    //auto loadConfigDirectory = reinterpret_cast<IMAGE_LOAD_CONFIG_DIRECTORY*>(base + dataDirectory.VirtualAddress);
+
+    auto ntHeaders2 = reinterpret_cast<PIMAGE_NT_HEADERS>(dosHeader + dosHeader->e_lfanew);
+    auto currentSection2 = IMAGE_FIRST_SECTION(ntHeaders2);
+    hasA64Xrm = false;
+    for (auto i = 0; i < ntHeaders2->FileHeader.NumberOfSections; i++, currentSection2++)
+    {
+        auto name = reinterpret_cast<const char*>(currentSection2->Name);
+        if (std::string(name) == ".a64xrm")
+        {
+            hasA64Xrm = true;
+            break;
+        }
+    }
+
+    printf("%20s: [%s]\n", "Has .a64xrm section", hasA64Xrm ? "TRUE" : "FALSE");
+    printf("\n");
+
+#pragma endregion Manual Scanning
 
     return true;
 }
