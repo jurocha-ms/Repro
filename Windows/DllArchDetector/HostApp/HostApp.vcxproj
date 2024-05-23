@@ -184,7 +184,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModuleARM64X\ModuleARM64X.vcxproj" Condition="'$(Platform)'!='ARM64' OR '$(Platform)'=='ARM64EC' OR '$(Platform)'=='x64'">
+    <ProjectReference Include="..\ModuleARM64X\ModuleARM64X.vcxproj">
       <Project>{e1994ae4-9e26-42f5-aa57-50f38721ee85}</Project>
     </ProjectReference>
     <ProjectReference Include="..\ModuleARM64EC\ModuleARM64EC.vcxproj" Condition="'$(Platform)'=='ARM64EC' OR '$(Platform)'=='x64'">
