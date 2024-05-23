@@ -44,21 +44,29 @@ bool DumpForArch(WORD arch)
     const char* moduleName;
     switch (arch)
     {
+#ifdef _M_X64
         case IMAGE_FILE_MACHINE_AMD64:
             moduleName = ModuleNameX64();
             break;
+#endif // _M_X64
+#ifdef _M_ARM64
         case IMAGE_FILE_MACHINE_ARM64:
             moduleName = "ModuleARM64.dll";
             break;
+#endif // _M_ARM64
+#if _M_ARM64EC
         case IMAGE_FILE_MACHINE_ARM64EC:
             moduleName = ModuleNameARM64EC();
             break;
+#endif // _M_ARM64EC
+#if defined(_M_ARM64) || defined(_M_ARM64EC)
         case IMAGE_FILE_MACHINE_ARM64X:
             moduleName = "ModuleARM64X.dll";
             break;
+#endif // defined(_M_ARM64) || defined(_M_ARM64EC)
 
         default:
-            printf("[FAIL] Unknown arch: [0x%X]\n\n", arch);
+            printf("[FAIL] Unknown or invalid arch: [0x%X]\n\n", arch);
             return false;
     }
 
