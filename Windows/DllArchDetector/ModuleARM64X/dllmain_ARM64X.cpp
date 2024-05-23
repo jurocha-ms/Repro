@@ -31,3 +31,8 @@ const char* MessageARM64X() noexcept
 {
     return "This is ARM64EC";
 }
+
+char const* __cdecl ModuleNameARM64X(void) noexcept
+{
+    return "ModuleARM64X.dll";
+}

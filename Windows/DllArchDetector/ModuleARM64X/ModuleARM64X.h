@@ -5,3 +5,5 @@
 #include <windows.h>
 
 const char* MessageARM64X() noexcept;
+
+char const* __cdecl ModuleNameARM64X(void) noexcept;

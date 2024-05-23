@@ -51,7 +51,7 @@ bool DumpForArch(WORD arch)
 #endif // _M_X64
 #ifdef _M_ARM64
         case IMAGE_FILE_MACHINE_ARM64:
-            moduleName = "ModuleARM64.dll";
+            moduleName = ModuleNameARM64();
             break;
 #endif // _M_ARM64
 #if _M_ARM64EC
@@ -61,7 +61,7 @@ bool DumpForArch(WORD arch)
 #endif // _M_ARM64EC
 #if defined(_M_ARM64) || defined(_M_ARM64EC)
         case IMAGE_FILE_MACHINE_ARM64X:
-            moduleName = "ModuleARM64X.dll";
+            moduleName = ModuleNameARM64X();
             break;
 #endif // defined(_M_ARM64) || defined(_M_ARM64EC)
 
