@@ -4,7 +4,7 @@
 #include "../ModuleX64/ModuleX64.h"
 
 // Windows API
-#include <DbgHelp.h>
+//#include <DbgHelp.h>
 //#include <ImageHlp.h>
 #include <libloaderapi.h>
 
@@ -51,7 +51,6 @@ bool DumpForArch(WORD arch)
             moduleName = "ModuleARM64.dll";
             break;
         case IMAGE_FILE_MACHINE_ARM64EC:
-            moduleName = "ModuleARM64EC.dll";
             moduleName = ModuleNameARM64EC();
             break;
         case IMAGE_FILE_MACHINE_ARM64X:
@@ -63,9 +62,9 @@ bool DumpForArch(WORD arch)
             return false;
     }
 
-#if 0
 #pragma region ImageLoad
 
+#if 0
     auto loaded = ImageLoad(moduleName, nullptr);
     if (!loaded)
     {
@@ -135,9 +134,9 @@ bool DumpForArch(WORD arch)
     printf("%20s: [%d]\n", "Contains ARM64", fileMachs.ARM64);
     printf("%20s: [%d]\n", "Contains ARM64EC", fileMachs.ARM64EC);
     printf("\n");
+#endif // 0
 
 #pragma endregion RtlGetImageFileMachines
-#endif // 0
 
     auto moduleHandle =  GetModuleHandleA(moduleName);
     if (moduleHandle == nullptr)
@@ -177,27 +176,34 @@ bool DumpForArch(WORD arch)
  */
 #pragma region Manual Scanning
 
+    printf("For module [%s]\n", moduleName);
+
     auto base = reinterpret_cast<std::byte*>(moduleHandle);
     auto dosHeader = reinterpret_cast<IMAGE_DOS_HEADER*>(moduleHandle);
     auto signature = reinterpret_cast<char*>(base + dosHeader->e_lfanew); // "PE\0\0"
     auto fileHeader = reinterpret_cast<IMAGE_FILE_HEADER*>(signature + 4);
+
+    printf("%20s: [0x%X]\n", "Machine", fileHeader->Machine);
+
     if (fileHeader->SizeOfOptionalHeader < sizeof(IMAGE_OPTIONAL_HEADER))
     {
-        // No optional header => not an ARM64EC image
-        return true;
+        printf("[FAIL] No optional header => not an ARM64EC image.\n");
+        return false;
     }
     auto optionalHeader = reinterpret_cast<IMAGE_OPTIONAL_HEADER*>(
         reinterpret_cast<std::byte*>(fileHeader) + sizeof(*fileHeader)
     );
-    if (optionalHeader->NumberOfRvaAndSizes < 11)
+    if (optionalHeader->NumberOfRvaAndSizes <= IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG)
     {
         // Ensure IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG is available
-        return true;
+        printf("[FAIL] No IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG entry.\n");
+        return false;
     }
     auto dataDirectory = optionalHeader->DataDirectory[IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG];
     if (dataDirectory.Size < sizeof(IMAGE_LOAD_CONFIG_DIRECTORY))
     {
-        return true;
+        printf("[FAIL] Incomplete or missing load config directory [%d/%d].\n", static_cast<int>(dataDirectory.Size), static_cast<int>(sizeof(IMAGE_LOAD_CONFIG_DIRECTORY)));
+        return false;
     }
     auto loadConfigDirectory = reinterpret_cast<IMAGE_LOAD_CONFIG_DIRECTORY*>(base + dataDirectory.VirtualAddress);
     bool hasChpeMetadata = loadConfigDirectory->CHPEMetadataPointer != 0;
@@ -231,13 +237,13 @@ int main()
     DumpForArch(IMAGE_FILE_MACHINE_ARM64);
 #endif // _M_ARM64
 
-#ifdef _M_ARM64EC
-    // Implies _M_X64
-#endif // _M_ARM64EC
-
 #ifdef _M_X64
     DumpForArch(IMAGE_FILE_MACHINE_AMD64);
-    //DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
+
+#ifdef _M_ARM64EC
+    DumpForArch(IMAGE_FILE_MACHINE_ARM64EC);
+#endif // _M_ARM64EC
+
 #endif // _M_X64
 
 DumpForArch(IMAGE_FILE_MACHINE_ARM64X);
