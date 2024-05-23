@@ -36,3 +36,5 @@ char const* __cdecl ModuleNameARM64X(void) noexcept
 {
     return "ModuleARM64X.dll";
 }
+
+extern "C" { void FooARM64X(){} }

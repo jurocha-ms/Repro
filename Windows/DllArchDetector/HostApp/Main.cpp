@@ -61,7 +61,14 @@ bool DumpForArch(WORD arch)
 #endif // _M_ARM64EC
 #if defined(_M_ARM64) || defined(_M_ARM64EC)
         case IMAGE_FILE_MACHINE_ARM64X:
+            //FooARM64X();
+
+#ifdef _M_ARM64EC
             moduleName = ModuleNameARM64X();
+#else
+            moduleName = "ModuleNameARM64X.dll";
+#endif // _M_ARM64EC
+
             break;
 #endif // defined(_M_ARM64) || defined(_M_ARM64EC)
 

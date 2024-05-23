@@ -7,3 +7,5 @@
 const char* MessageARM64X() noexcept;
 
 char const* __cdecl ModuleNameARM64X(void) noexcept;
+
+extern "C" { void FooARM64X(); }
