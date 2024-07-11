@@ -220,7 +220,7 @@ bool DumpForArch(WORD arch)
         printf("[FAIL] Incomplete or missing load config directory [%d/%d].\n", static_cast<int>(dataDirectory.Size), static_cast<int>(sizeof(IMAGE_LOAD_CONFIG_DIRECTORY)));
         return false;
     }
-    auto loadConfigDirectory = reinterpret_cast<IMAGE_LOAD_CONFIG_DIRECTORY*>(base + dataDirectory.VirtualAddress);
+    auto loadConfigDirectory = reinterpret_cast<PIMAGE_LOAD_CONFIG_DIRECTORY>(base + dataDirectory.VirtualAddress);
     bool hasChpeMetadata = loadConfigDirectory->CHPEMetadataPointer != 0;
 
     auto ntHeaders2 = reinterpret_cast<PIMAGE_NT_HEADERS>(base + dosHeader->e_lfanew);
