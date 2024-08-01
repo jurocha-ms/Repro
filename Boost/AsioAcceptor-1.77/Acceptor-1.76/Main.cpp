@@ -5,7 +5,7 @@
 int main()
 {
     boost::asio::io_context my_context{};
-    int port = 1776;
+    int port = 1760;
 
     boost::asio::ip::tcp::acceptor acceptor(my_context);
     boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::tcp::v4(), port);
