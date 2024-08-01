@@ -1,0 +1,12 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = false
+
+# Xml project files
+[*.{config,csproj,njsproj,targets,vcxitems,vcxproj,vcxproj.filters}]
+indent_style = space
+
+# XML config files
+[*.{msbuild,props,targets,ruleset,config,nuspec}]
+indent_style = space
