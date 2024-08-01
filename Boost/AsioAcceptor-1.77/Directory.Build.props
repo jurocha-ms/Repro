@@ -10,16 +10,6 @@
       </PreprocessorDefinitions>
       <AdditionalOptions Condition="'$(AddOpts)' == 'true'">
         %(AdditionalOptions)
-        /JMC
-        /nologo
-        /WX-
-        /diagnostics:column
-        /Od
-        /Gm-
-        /EHsc
-        /RTC1
-        /MDd
-        /GS
         /fp:precise
         /Qspectre
         /Zc:wchar_t
