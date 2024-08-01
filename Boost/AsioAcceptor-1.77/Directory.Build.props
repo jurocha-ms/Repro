@@ -10,9 +10,6 @@
       </PreprocessorDefinitions>
       <AdditionalOptions Condition="'$(AddOpts)' == 'true'">
         %(AdditionalOptions)
-        /TP
-        /FC
-        /errorReport:queue
         /utf-8
         /bigobj
         /Zc:twoPhase-
