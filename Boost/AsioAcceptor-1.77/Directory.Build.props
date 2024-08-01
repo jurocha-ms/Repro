@@ -10,8 +10,6 @@
       </PreprocessorDefinitions>
       <AdditionalOptions Condition="'$(AddOpts)' == 'true'">
         %(AdditionalOptions)
-        /utf-8
-        /bigobj
         /Zc:twoPhase-
       </AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
