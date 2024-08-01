@@ -10,10 +10,8 @@
       </PreprocessorDefinitions>
       <AdditionalOptions Condition="'$(AddOpts)' == 'true'">
         %(AdditionalOptions)
-        /Zi
         /JMC
         /nologo
-        /W1
         /WX-
         /diagnostics:column
         /Od
@@ -22,7 +20,6 @@
         /RTC1
         /MDd
         /GS
-        /guard:cf
         /fp:precise
         /Qspectre
         /Zc:wchar_t
@@ -30,7 +27,6 @@
         /Zc:inline
         /GR-
         /std:c++20
-        /external:W1
         /Gd
         /TP
         /FC
