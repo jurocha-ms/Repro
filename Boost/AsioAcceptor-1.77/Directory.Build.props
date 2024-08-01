@@ -8,6 +8,37 @@
         _WINSOCK_DEPRECATED_NO_WARNINGS;
         BOOST_ALL_NO_LIB=1
       </PreprocessorDefinitions>
+      <AdditionalOptions>
+        %(AdditionalOptions)
+        /Zi
+        /JMC
+        /nologo
+        /W1
+        /WX-
+        /diagnostics:column
+        /Od
+        /Gm-
+        /EHsc
+        /RTC1
+        /MDd
+        /GS
+        /guard:cf
+        /fp:precise
+        /Qspectre
+        /Zc:wchar_t
+        /Zc:forScope
+        /Zc:inline
+        /GR-
+        /std:c++20
+        /external:W1
+        /Gd
+        /TP
+        /FC
+        /errorReport:queue
+        /utf-8
+        /bigobj
+        /Zc:twoPhase-
+      </AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
