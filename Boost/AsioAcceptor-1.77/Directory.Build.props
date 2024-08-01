@@ -10,13 +10,6 @@
       </PreprocessorDefinitions>
       <AdditionalOptions Condition="'$(AddOpts)' == 'true'">
         %(AdditionalOptions)
-        /fp:precise
-        /Qspectre
-        /Zc:wchar_t
-        /Zc:forScope
-        /Zc:inline
-        /GR-
-        /Gd
         /TP
         /FC
         /errorReport:queue
