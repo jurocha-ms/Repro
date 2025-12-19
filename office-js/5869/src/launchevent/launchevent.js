@@ -63,12 +63,26 @@ function blobbyfill(event) {
   }
 }
 
+/*
+Reference (Chromium-based browser):
+
+const uri = 'http://localhost:5555/officedev/office-js/issues/5869';
+const formData = new FormData();
+const xhr = new XMLHttpRequest();
+undefined
+xhr.onload = () => { console.log(`[${xhr.responseText}]`); }
+xhr.open('POST', uri, true);
+xhr.onerror = e => { console.log(e) }
+xhr.send(formData);
+
+[Multipart form data with 0 entries]
+*/
 function emptyForm(event) {
 	const uri = 'http://localhost:5555/officedev/office-js/issues/5869';
 	const xhr = new XMLHttpRequest();
 	const formData = new FormData();
-	formData.append('k1', 'v1');
-	formData.append('k2', 'v2');
+	// formData.append('k1', 'v1');
+	// formData.append('k2', 'v2');
 
 	xhr.open('POST', uri, true);
 	xhr.onload = () => {
@@ -81,10 +95,10 @@ function emptyForm(event) {
 		Office.context.mailbox.item.body.setAsync(xhr.responseText);
 	};
 	xhr.onerror = (error) => {
-		Office.context.mailbox.item.body.setAsync("[FAIL]\n" + JSON.stringify(error, null, 2));
+		Office.context.mailbox.item.body.setAsync("[FAIL]\n" + uri + "\n" + JSON.stringify(error, null, 2));
 	};
 
-	xhr.send();
+	xhr.send(formData);
 }
 
 function onNewMessageComposeHandler(event) {
