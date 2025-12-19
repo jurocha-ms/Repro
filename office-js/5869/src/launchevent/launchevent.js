@@ -3,6 +3,10 @@
 * See LICENSE in the project root for license information.
 */
 
+/*
+ * Start WebPack (stand-alone): node node_modules\webpack\bin\webpack.js serve --mode development
+ */
+
 function testCORS(event) {
 
   const uri = 'https://jsonplaceholder.typicode.com/posts/1';
@@ -78,31 +82,106 @@ xhr.send(formData);
 [Multipart form data with 0 entries]
 */
 function emptyForm(event) {
-	const uri = 'http://localhost:5555/officedev/office-js/issues/5869';
-	const xhr = new XMLHttpRequest();
-	const formData = new FormData();
-	// formData.append('k1', 'v1');
-	// formData.append('k2', 'v2');
+  const uri = 'http://localhost:5555/officedev/office-js/issues/5869';
+  const xhr = new XMLHttpRequest();
+  const formData = new FormData();
+  // formData.append('k1', 'v1');
+  // formData.append('k2', 'v2');
 
-	xhr.open('POST', uri, true);
-	xhr.onload = () => {
-		if (xhr.status < 200 || xhr.status > 299) {
-			Office.context.mailbox.item.subject.setAsync('[NOK] ' + xhr.status);
-			return;
-		}
+  xhr.open('POST', uri, true);
+  xhr.onload = () => {
+    if (xhr.status < 200 || xhr.status > 299) {
+      Office.context.mailbox.item.subject.setAsync('[NOK] ' + xhr.status);
+      return;
+    }
 
-		Office.context.mailbox.item.subject.setAsync('[OK] ' + xhr.status);
-		Office.context.mailbox.item.body.setAsync(xhr.responseText);
-	};
-	xhr.onerror = (error) => {
-		Office.context.mailbox.item.body.setAsync("[FAIL]\n" + uri + "\n" + JSON.stringify(error, null, 2));
-	};
+    Office.context.mailbox.item.subject.setAsync('[OK] ' + xhr.status);
+    Office.context.mailbox.item.body.setAsync(xhr.responseText);
+  };
+  xhr.onerror = (error) => {
+    Office.context.mailbox.item.body.setAsync("[FAIL]\n" + uri + "\n" + JSON.stringify(error, null, 2));
+  };
 
-	xhr.send(formData);
+  xhr.send(formData);
+}
+
+/*
+  const uri = 'http://localhost:5555/officedev/office-js/issues/5869';
+  const xhr = new XMLHttpRequest();
+  const formData = new FormData();
+
+  // Office.context.mailbox.item.body.setAsync('pre LET');
+
+  let bstr = atob('fileContent'),
+  n = bstr.length,
+  u8arr = new Uint8Array(n);
+
+  // Office.context.mailbox.item.body.setAsync('post LET');
+
+  while(n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+  }
+
+xhr.responseType = 'blob';
+  xhr.open('POST', uri, true);
+    xhr.onload = (response) => {
+      if (xhr.status < 200 || xhr.status > 299) { console.error('bad status ' + xhr.status); }
+      console.log(JSON.stringify(response));
+    };
+    xhr.onerror = error => { console.log(error); };
+
+xhr.send(formData);
+*/
+function fileForm(event) {
+  const uri = 'http://localhost:5555/officedev/office-js/issues/5869';
+  const xhr = new XMLHttpRequest();
+  const formData = new FormData();
+
+  // Office.context.mailbox.item.body.setAsync('pre LET');
+
+  let bstr = a2b('fileContent'),
+  n = bstr.length,
+  u8arr = new Uint8Array(n);
+
+  // Office.context.mailbox.item.body.setAsync('post LET');
+
+  while(n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  // Office.context.mailbox.item.body.setAsync('post while');
+
+  ///Office.context.mailbox.item.body.setAsync(`u8arr: [${u8arr}]\nbstr: [${bstr}]`);
+
+  //THIS FAILS!!!
+  // const file = new File([u8arr], "attachmentName");
+  // formData.append('file', file);
+  // formData.append('file', new File([u8arr], "attachmentName"));
+
+  Office.context.mailbox.item.body.setAsync('post PEND');
+
+  xhr.responseType = 'blob';
+  xhr.open('POST', uri, true);
+  xhr.onload = () => {
+    if (xhr.status < 200 || xhr.status > 299) {
+      Office.context.mailbox.item.subject.setAsync('[NOK] ' + xhr.status);
+      return;
+    }
+
+    Office.context.mailbox.item.subject.setAsync('[OK] ' + xhr.status);
+    Office.context.mailbox.item.body.setAsync(xhr.responseText);
+  };
+  xhr.onerror = (error) => {
+    Office.context.mailbox.item.body.setAsync("[FAIL]\n" + uri + "\n" + JSON.stringify(error, null, 2));
+  };
+
+  Office.context.mailbox.item.body.setAsync('PRE send');
+
+  // xhr.send(formData);
 }
 
 function onNewMessageComposeHandler(event) {
-  emptyForm(event);
+  fileForm(event);
 }
 
 function onNewAppointmentComposeHandler(event) {
