@@ -63,8 +63,32 @@ function blobbyfill(event) {
   }
 }
 
+function emptyForm(event) {
+	const uri = 'http://localhost:5555/officedev/office-js/issues/5869';
+	const xhr = new XMLHttpRequest();
+	const formData = new FormData();
+	formData.append('k1', 'v1');
+	formData.append('k2', 'v2');
+
+	xhr.open('POST', uri, true);
+	xhr.onload = () => {
+		if (xhr.status < 200 || xhr.status > 299) {
+			Office.context.mailbox.item.subject.setAsync('[NOK] ' + xhr.status);
+			return;
+		}
+
+		Office.context.mailbox.item.subject.setAsync('[OK] ' + xhr.status);
+		Office.context.mailbox.item.body.setAsync(xhr.responseText);
+	};
+	xhr.onerror = (error) => {
+		Office.context.mailbox.item.body.setAsync("[FAIL]\n" + JSON.stringify(error, null, 2));
+	};
+
+	xhr.send();
+}
+
 function onNewMessageComposeHandler(event) {
-  blobbyfill(event);
+  emptyForm(event);
 }
 
 function onNewAppointmentComposeHandler(event) {
