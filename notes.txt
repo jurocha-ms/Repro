@@ -1,0 +1,2 @@
+[Add-In webpack command]
+node node_modules\.bin\\..\webpack\bin\webpack.js" serve --mode development
