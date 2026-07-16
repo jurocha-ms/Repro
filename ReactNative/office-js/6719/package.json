@@ -1,0 +1,14 @@
+{
+  "name": "ojs-6719-repro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Repro for OJS #6719 / ADO 7409444 - fetch/XHR fails in classic Outlook JS-only (RNW) event runtime (OnAppointmentSend)",
+  "scripts": {
+    "start": "node server.js",
+    "cert": "npx office-addin-dev-certs install"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "office-addin-dev-certs": "^1.13.0"
+  }
+}

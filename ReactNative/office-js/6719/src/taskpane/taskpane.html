@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OJS 6719 repro</title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <style>
+      body { font-family: Segoe UI, sans-serif; margin: 16px; }
+      button { padding: 8px 12px; font-size: 14px; }
+      pre { background: #f3f3f3; padding: 8px; white-space: pre-wrap; }
+    </style>
+  </head>
+  <body>
+    <h3>OJS #6719 repro</h3>
+    <p>
+      This taskpane runs the <b>same</b> fetch/XHR probes as the JS-only event
+      handler, but from the <b>WebView</b> runtime. If these succeed here but
+      fail during <code>OnAppointmentSend</code>, the problem is specific to the
+      JS-only (RNW) transport.
+    </p>
+    <button id="run">Run probes from WebView</button>
+    <p>Then create an appointment and press <b>Send</b> to trigger the JS-only handler.</p>
+    <pre id="out">Ready.</pre>
+    <script src="taskpane.js"></script>
+  </body>
+</html>
